@@ -1,0 +1,28 @@
+{
+  "author": "igorlogius",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "description": "",
+  "icons": {
+  },
+  "manifest_version": 2,
+  "name": "Select Tabs Enhanced",
+  "options_ui": {
+    "browser_style": true,
+    "open_in_tab": true,
+    "page": "options.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "menus",
+    "<all_urls>"
+  ],
+  "version": "1.0.0"
+}

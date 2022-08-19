@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"></meta>
+  <title>Select Tabs Enhanced: Popup</title>
+    <style>
+    body {
+        background-color: lightgray;
+        padding:2%;
+    }
+    input {
+        height:2.0em;
+        vertical-align: middle;
+    }
+    </style>
+</head>
+<body>
+        <fieldset>
+                <legend>Last Access Time Range</legend>
+                Latest <input type="number" id="accessTimeMax" /> Minutes Ago (-1 : infinit)
+                <p/>
+                Earliest <input type="number" id="accessTimeMin"  /> Minutes Ago (0: now )
+                <p/>
+                <input type="checkbox" id="operateOnSelected" /> Operate on selected only
+                <p/>
+                <button id="submitTime">Submit</button>
+        </fieldset>
+        <script src="popup.js"></script>
+</body>
+</html>
