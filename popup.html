@@ -17,13 +17,14 @@
 <body>
         <fieldset>
                 <legend>Last Access Time Range</legend>
-                Latest <input type="number" id="accessTimeMax" /> Minutes Ago (-1 : infinit)
+                Latest <input type="number" id="accessTimeMax" value="60" min="0" /> Minutes Ago (-1 : infinit)
                 <p/>
-                Earliest <input type="number" id="accessTimeMin"  /> Minutes Ago (0: now )
-                <p/>
-                <input type="checkbox" id="operateOnSelected" /> Operate on selected only
+                Earliest <input type="number" id="accessTimeMin"  value="0" min="0" /> Minutes Ago (0: now )
                 <p/>
                 <button id="submitTime">Submit</button>
+                <p/>
+                <div id="message"></div>
+
         </fieldset>
         <script src="popup.js"></script>
 </body>

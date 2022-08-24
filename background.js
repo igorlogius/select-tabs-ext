@@ -8,6 +8,8 @@ const queryBase = {
     hidden: false
 }
 
+let multipleHighlighted = false;
+
 function highlightTabsByWindowId(winId2tabIdxMap){
 	winId2tabIdxMap.forEach( (value, key /*,map*/) => {
 		browser.tabs.highlight({
@@ -123,10 +125,10 @@ browser.menus.create({
         if(tab.cookieStoreId){
             let query = queryBase;
                 query['cookieStoreId'] = tab.cookieStoreId;
-    		const tabs = (await browser.tabs.query(query))
+            const tabs = (await browser.tabs.query(query))
                 // order clicked tabs to the front
                 .sort((a,b) => ((a.id === tab.id) ? -1 : ((b.id === tab.id) ? 1 : 0) ) );
-    		highlight(tabs);
+            highlight(tabs);
         }
 	}
 });
@@ -407,7 +409,7 @@ browser.menus.create({
 browser.menus.create({
 	title: "UserScripts",
 	contexts: ["tab"],
-	onclick: async (info, tab) => {
+	onclick: async (/*info, tab*/) => {
 
         let store;
         try {
@@ -432,7 +434,14 @@ browser.menus.create({
 
         const query = queryBase;
               query['url'] = '<all_urls>';
+        if(multipleHighlighted) {
+              // more than one TabIsHighlighted
+              // only run the scripts on the highlighted tabs
+              // and the ones still highlighted match the script
+              query['highlighted'] = true;
+        }
 		const tabs = (await browser.tabs.query(query))
+
         const tabsToHL = [];
         let hltab  = false;
         for(const t of tabs) {
@@ -483,5 +492,11 @@ browser.menus.create({
 
 	} // onclick
 });
+
+function handleHighlighted(highlightInfo) {
+    multipleHighlighted = (highlightInfo.tabIds.length > 1);
+}
+
+browser.tabs.onHighlighted.addListener(handleHighlighted);
 
 // EOF

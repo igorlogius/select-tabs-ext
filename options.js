@@ -1,3 +1,4 @@
+/* global browser */
 
 const extId = 'PER';
 const temporary = browser.runtime.id.endsWith('@temporary-addon');
