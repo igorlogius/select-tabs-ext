@@ -4,6 +4,10 @@ let allTabs = [];
 let consideredTabsIds = new Set();
 let multipleHighlighted = false; //
 
+const temporary = browser.runtime.id.endsWith('@temporary-addon'); // debugging?
+const manifest = browser.runtime.getManifest();
+const extname = manifest.name;
+
 function notify(title, message = "", iconUrl = "icon.png") {
     return browser.notifications.create(""+Date.now(),
         {
@@ -27,7 +31,8 @@ function highlightTabsByWindowId(winId2tabIdxMap){
 
 function highlight(tabs){
     if(tabs.length < 1){
-        console.log('highlighting not changed, no match in selection');
+        //console.log('highlighting not changed, no match in selection');
+        notify(extname, 'no tabs matched, selection was not changed');
         return;
     }
 	let winId2tabIdxMap = new Map();
