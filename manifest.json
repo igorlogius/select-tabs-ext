@@ -11,7 +11,7 @@
   "icons": {
   },
   "manifest_version": 2,
-  "name": "Select Tabs Enhanced",
+  "name": "Select Tabs Advanced",
   "options_ui": {
     "page": "options.html"
   },
