@@ -19,6 +19,7 @@
     "storage",
     "tabs",
     "menus",
+    "notifications",
     "<all_urls>"
   ],
   "version": "1.0.0"

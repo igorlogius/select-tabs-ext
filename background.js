@@ -4,6 +4,17 @@ let allTabs = [];
 let consideredTabsIds = new Set();
 let multipleHighlighted = false; //
 
+function notify(title, message = "", iconUrl = "icon.png") {
+    return browser.notifications.create(""+Date.now(),
+        {
+           "type": "basic"
+            ,iconUrl
+            ,title
+            ,message
+        }
+    );
+}
+
 function highlightTabsByWindowId(winId2tabIdxMap){
 	winId2tabIdxMap.forEach( (value, key /*,map*/) => {
 		browser.tabs.highlight({
@@ -478,6 +489,30 @@ browser.menus.create({
 });
 
 //
+browser.menus.create({
+	title: "Pinned",
+    parentId: "State",
+	contexts: ["tab"],
+	onclick: async (/*info, tab*/) => {
+        let query;
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true,
+                pinned: true
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true,
+                pinned: true
+            }
+        }
+		const tabs = await browser.tabs.query(query);
+		highlight(tabs);
+	}
+});
 
 browser.menus.create({
 	title: "Muted",
@@ -635,7 +670,7 @@ browser.menus.create({
 browser.menus.create({
 	title: "UserScripts",
 	contexts: ["tab"],
-	onclick: async (/*info, tab*/) => {
+	onclick: async (info, tab) => {
 
         let store;
         try {
@@ -658,7 +693,7 @@ browser.menus.create({
             return;
         }
 
-        const query = {
+        let query = {
                 hidden: false,
                 currentWindow: true,
                 url: '<all_urls>'
@@ -687,9 +722,66 @@ browser.menus.create({
                 try {
                     //new Function(selector.code);
                     let res = await browser.tabs.executeScript(t.id, {
-                        code: selector.code
+                        code: `(function() {
+                                const clkTab = {
+                                    "id": ${tab.id},
+                                    "url": "${tab.url}",
+                                    "active": ${tab.active},
+                                    "attention": ${tab.attention},
+                                    "audible": ${tab.audible},
+                                    "autoDiscardable": ${tab.autoDiscardable},
+                                    "cookieStoreId": "${tab.cookieStoreId}",
+                                    "discarded": ${tab.discarded},
+                                    "favIconUrl": "${tab.favIconUrl}",
+                                    "height": ${tab.height},
+                                    "hidden": ${tab.hidden},
+                                    "highlighted": ${tab.highlight},
+                                    "incognito": ${tab.incognito},
+                                    "index": ${tab.index},
+                                    "isArticle": ${tab.isArticle},
+                                    "isInReaderMode": ${tab.isInReaderMode},
+                                    "lastAccessed": ${tab.lastAccessed},
+                                    "openerTabId": ${tab.openerTabId},
+                                    "pinned": ${tab.pinned},
+                                    "sessionId": "${tab.sessionId}",
+                                    "status": "${tab.status}",
+                                    "successorTabId": ${tab.successorTabId},
+                                    "title": "${tab.title}",
+                                    "width": ${tab.width},
+                                    "windowId": ${tab.windowId}
+                                };
+                                const cmpTab= {
+                                    "id": ${t.id},
+                                    "url": "${t.url}",
+                                    "active": ${t.active},
+                                    "attention": ${t.attention},
+                                    "audible": ${t.audible},
+                                    "autoDiscardable": ${t.autoDiscardable},
+                                    "cookieStoreId": "${t.cookieStoreId}",
+                                    "discarded": ${t.discarded},
+                                    "favIconUrl": "${t.favIconUrl}",
+                                    "height": ${t.height},
+                                    "hidden": ${t.hidden},
+                                    "highlighted": ${t.highlight},
+                                    "incognito": ${t.incognito},
+                                    "index": ${t.index},
+                                    "isArticle": ${t.isArticle},
+                                    "isInReaderMode": ${t.isInReaderMode},
+                                    "lastAccessed": ${t.lastAccessed},
+                                    "openerTabId": ${t.openerTabId},
+                                    "pinned": ${t.pinned},
+                                    "sessionId": "${t.sessionId}",
+                                    "status": "${t.status}",
+                                    "successorTabId": ${t.successorTabId},
+                                    "title": "${t.title}",
+                                    "width": ${t.width},
+                                    "windowId": ${t.windowId}
+                                };
+                                `
+                                +  selector.code
+                                + "}());"
                     });
-                    //console.log(tab.title, res[0]);
+                    //console.log(t.title, res[0]);
                     if(res.length > 0){
                         res = res[0];
                     }
