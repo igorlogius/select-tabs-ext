@@ -1,14 +1,8 @@
 /* global browser */
 
 let allTabs = [];
-let tempListEmpty = false; // needs a checkbox menu entry
-
-const queryBase = {
-    currentWindow: true,
-    hidden: false
-}
-
-let multipleHighlighted = false;
+let consideredTabsIds = new Set();
+let multipleHighlighted = false; //
 
 function highlightTabsByWindowId(winId2tabIdxMap){
 	winId2tabIdxMap.forEach( (value, key /*,map*/) => {
@@ -21,6 +15,10 @@ function highlightTabsByWindowId(winId2tabIdxMap){
 }
 
 function highlight(tabs){
+    if(tabs.length < 1){
+        console.log('highlighting not changed, no match in selection');
+        return;
+    }
 	let winId2tabIdxMap = new Map();
 	tabs.forEach( t => {
 		if(!winId2tabIdxMap.has(t.windowId)){
@@ -36,9 +34,11 @@ function getDecendentTabs(ancestorTabId, max_relation_depth = -1) {
 	for (const t of allTabs) {
 		// ref. openerTabId is only present if the opener tab
 		// still exists and is in the same window.
-		if(t.openerTabId === ancestorTabId) {
-			out.push(t);
-            if(max_relation_depth !== 1){
+		if( t.openerTabId === ancestorTabId ) {
+            if( consideredTabsIds.has(t.id) ) {
+                out.push(t);
+            }
+            if( max_relation_depth !== 1 ) {
                 const tmp = getDecendentTabs(t.id, (max_relation_depth-1));
                 out = [ ...out, ...tmp];
             }
@@ -47,26 +47,28 @@ function getDecendentTabs(ancestorTabId, max_relation_depth = -1) {
 	return out;
 }
 
-async function getAncestorTabs(ancestorTabId, tabs, max_relation_depth = -1) {
+async function getAncestorTabs(ancestorTabId, max_relation_depth = -1) {
     let out = [];
     const tabId2tabMap = new Map();
-    tabs.forEach( t => { tabId2tabMap.set(t.id, t); });
+    allTabs.forEach( t => { tabId2tabMap.set(t.id, t); });
 
     let ancestorTab = await browser.tabs.get(ancestorTabId);
-    out.push(ancestorTab);
+    if(consideredTabsIds.has(ancestorTab.id)){
+        out.push(ancestorTab);
+    }
 
     let tmp;
-
-    while(      typeof ancestorTab.openerTabId === 'number'
-            &&  max_relation_depth !== 1
+    while(     typeof ancestorTab.openerTabId === 'number'
+            && max_relation_depth !== 1
             && tabId2tabMap.has(ancestorTab.openerTabId)
     ){
         tmp = tabId2tabMap.get(ancestorTab.openerTabId)
-        out.push(tmp);
+        if(consideredTabsIds.has(tmp.id)){
+            out.push(tmp);
+        }
         ancestorTab = tmp;
     }
     return out;
-
 }
 
 // -------------
@@ -75,11 +77,14 @@ browser.menus.create({
 	title: "Invert Selection",
 	contexts: ["tab"],
 	onclick: async (/*info, tab*/) => {
-        // Previously highlighted tabs not included in tabs will stop being highlighted. The first tab in tabs will become active.
+        // Previously highlighted tabs not included in tabs will stop being highlighted.
+        // The first tab in tabs will become active.
         // ref. https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/highlight
-        let query = queryBase;
-            query['highlighted'] = false;
-        const tabs = await browser.tabs.query(query);
+        const tabs = await browser.tabs.query({
+            highlighted: false,
+            currentWindow: true,
+            hidden: false
+        });
 		highlight(tabs);
 	}
 });
@@ -90,21 +95,18 @@ browser.menus.create({
     type: "separator",
 	contexts: ["tab"]
 });
-
 browser.menus.create({
 	id: "Relationship",
     title: "Relationship",
     type: "separator",
 	contexts: ["tab"]
 });
-
 browser.menus.create({
 	id: "URL Property",
     title: "URL Property",
     type: "separator",
 	contexts: ["tab"]
 });
-
 browser.menus.create({
 	id: "State",
     title: "State",
@@ -123,8 +125,17 @@ browser.menus.create({
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
         if(tab.cookieStoreId){
-            let query = queryBase;
-                query['cookieStoreId'] = tab.cookieStoreId;
+            let query = {
+                currentWindow: true,
+                hidden: false,
+                cookieStoreId: tab.cookieStoreId
+            }
+            if(multipleHighlighted) {
+              // more than one TabIsHighlighted
+              // only run the scripts on the highlighted tabs
+              // and the ones still highlighted match the script
+              query['highlighted'] = true;
+            }
             const tabs = (await browser.tabs.query(query))
                 // order clicked tabs to the front
                 .sort((a,b) => ((a.id === tab.id) ? -1 : ((b.id === tab.id) ? 1 : 0) ) );
@@ -140,12 +151,22 @@ browser.menus.create({
     parentId: "Relationship",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+
+		allTabs  = await browser.tabs.query({
+            currentWindow: true,
+            hidden: false
+        });
+
+        if(multipleHighlighted) {
+            consideredTabsIds = new Set( (await browser.tabs.query( {
+                hidden: false,
+                currentWindow: true,
+                highlighted : true
+            })).map( t => t.id ) );
+        }else{
+            consideredTabsIds = new Set( allTabs.map( t => t.id ) );
         }
-		allTabs  = await browser.tabs.query(query);
-		highlight(getDecendentTabs(tab.id));
+		highlight(getDecendentTabs(tab.id).filter( t => ( t.id !== tab.id)) );
 	}
 });
 
@@ -154,39 +175,65 @@ browser.menus.create({
     parentId: "Relationship",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+		allTabs  = await browser.tabs.query({
+                hidden: false,
+                currentWindow: true
+        });
+        if(multipleHighlighted) {
+            consideredTabsIds = new Set((await browser.tabs.query({
+                hidden: false,
+                currentWindow: true,
+                highlighted : true
+            })).map( t => t.id ));
+        }else{
+            consideredTabsIds = new Set(allTabs.map( t => t.id));
         }
-		allTabs  = await browser.tabs.query(query);
-		highlight(getDecendentTabs(tab.openerTabId, 1));
+		highlight(getDecendentTabs(tab.openerTabId, 1).filter( t => (t.id !== tab.id)));
 	}
 });
 
+/*
 browser.menus.create({
 	title: "Siblings + Descendants",
     parentId: "Relationship",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+		allTabs  = await browser.tabs.query({
+                hidden: false,
+                currentWindow: true
+        });
+        if(multipleHighlighted) {
+            consideredTabsIds = new Set((await browser.tabs.query({
+                hidden: false,
+                currentWindow: true,
+                highlighted: true
+            })).map( t => t.id ));
+        }else{
+            consideredTabsIds = new Set(allTabs.map( t => t.id));
         }
-		allTabs  = await browser.tabs.query(query);
 		highlight(getDecendentTabs(tab.openerTabId));
 	}
 });
+*/
 
 browser.menus.create({
 	title: "Children",
     parentId: "Relationship",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+		allTabs  = await browser.tabs.query({
+                hidden: false,
+                currentWindow: true
+        });
+        if(multipleHighlighted) {
+            consideredTabsIds = new Set((await browser.tabs.query({
+                hidden: false,
+                currentWindow: true,
+                highlighted: true
+            })).map( t => t.id));
+        }else{
+            consideredTabsIds = new Set(allTabs.map( t => t.id));
         }
-		allTabs  = await browser.tabs.query(query);
 		highlight(getDecendentTabs(tab.id, 1));
 	}
 });
@@ -196,12 +243,22 @@ browser.menus.create({
     parentId: "Relationship",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+        let query;
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true
+            }
         }
 		const tabs = (await browser.tabs.query(query))
-            .filter( t => { t.id === tab.openerTabId });
+            .filter( t => (t.id === tab.openerTabId) );
+
         highlight(tabs);
 	}
 });
@@ -212,12 +269,49 @@ browser.menus.create({
     parentId: "Relationship",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+		allTabs = await browser.tabs.query({
+                hidden: false,
+                currentWindow: true
+        });
+        if(multipleHighlighted) {
+            let query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true
+            }
+            consideredTabsIds = new Set((await browser.tabs.query(query)).map( t => t.id));
+        }else{
+            consideredTabsIds = new Set(allTabs.map( t => t.id));
+        }
+        highlight ( await getAncestorTabs(tab.id,-1) );
+	}
+});
+
+// URL (can be done by Userscript too )
+
+browser.menus.create({
+	title: "Same URL",
+    parentId: "URL Property",
+	contexts: ["tab"],
+	onclick: async (info, tab) => {
+        let query;
+
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true,
+                url: tab.url
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true,
+                url: tab.url
+            }
         }
 		const tabs = await browser.tabs.query(query);
-        highlight ( await getAncestorTabs(tab.id,tabs, -1) );
+		highlight(tabs);
 	}
 });
 
@@ -228,8 +322,22 @@ browser.menus.create({
     parentId: "URL Property",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-            query['url'] = (new URL(tab.url)).origin + "/*";
+        let query;
+
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true,
+                url: (new URL(tab.url)).origin + "/*"
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true,
+                url: (new URL(tab.url)).origin + "/*"
+            }
+        }
 		const tabs = await browser.tabs.query(query);
 		highlight(tabs);
 	}
@@ -240,8 +348,23 @@ browser.menus.create({
     parentId: "URL Property",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-            query['url'] = "*://" + (new URL(tab.url)).hostname + "/*";
+        let query;
+        const hostname = (new URL(tab.url)).hostname;
+
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true,
+                url: "*://" + hostname + "/*"
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true,
+                url: "*://" + hostname + "/*"
+            }
+        }
 		const tabs = (await browser.tabs.query(query))
             .sort((a,b) => ((a.id === tab.id) ? -1 : ((b.id === tab.id) ? 1 : 0) ) );
 		highlight(tabs);
@@ -253,8 +376,22 @@ browser.menus.create({
     parentId: "URL Property",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-            query['url'] =  "*://*:" + (new URL(tab.url)).port+ "/*";
+        let query;
+        const port = (new URL(tab.url)).port;
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true,
+                url:  "*://*:" + port+ "/*"
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true,
+                url:  "*://*:" + port+ "/*"
+            }
+        }
 		const tabs = (await browser.tabs.query(query))
             .sort((a,b) => ((a.id === tab.id) ? -1 : ((b.id === tab.id) ? 1 : 0) ) );
 		highlight(tabs);
@@ -266,8 +403,22 @@ browser.menus.create({
     parentId: "URL Property",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-            query['url'] = (new URL(tab.url)).protocol + "//*/*";
+        let query;
+        const protocol = (new URL(tab.url)).hostname;
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true,
+                url: protocol + "//*/*"
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true,
+                url: protocol + "//*/*"
+            }
+        }
 		const tabs = (await browser.tabs.query(query))
             .sort((a,b) => ((a.id === tab.id) ? -1 : ((b.id === tab.id) ? 1 : 0) ) );
 		highlight(tabs);
@@ -281,9 +432,18 @@ browser.menus.create({
     parentId: "Directional",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+        let query;
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true
+            }
         }
 		const tabs = (await browser.tabs.query(query))
             .filter( t => { return (t.index < tab.index); })
@@ -297,9 +457,18 @@ browser.menus.create({
     parentId: "Directional",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+        let query;
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true
+            }
         }
 		const tabs = (await browser.tabs.query(query))
             .filter( t => { return (t.index > tab.index); })
@@ -315,10 +484,20 @@ browser.menus.create({
     parentId: "State",
 	contexts: ["tab"],
 	onclick: async (/*info, tab*/) => {
-        let query = queryBase;
-            query['muted'] = true;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+        let query;
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true,
+                muted: true
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true,
+                muted: true
+            }
         }
 		const tabs = await browser.tabs.query(query);
 		highlight(tabs);
@@ -331,9 +510,18 @@ browser.menus.create({
     parentId: "State",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+        let query;
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true
+            }
         }
 		const tabs = (await browser.tabs.query(query))
             .filter( t => t.status === "loading" )
@@ -347,9 +535,18 @@ browser.menus.create({
     parentId: "State",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+        let query;
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true
+            }
         }
 		const tabs = (await browser.tabs.query(query))
             .filter( t => t.status === "complete" )
@@ -363,9 +560,18 @@ browser.menus.create({
     parentId: "State",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+        let query;
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true
+            }
         }
 		const tabs = (await browser.tabs.query(query))
             .filter( t => (t.status !== "loading" && t.status !== 'complete') )
@@ -379,10 +585,20 @@ browser.menus.create({
     parentId: "State",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-            query['audible'] = true;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+        let query;
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true,
+                audible: true
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true,
+                audible: true
+            }
         }
 		const tabs = (await browser.tabs.query(query))
             .sort((a,b) => ((a.id === tab.id) ? -1 : ((b.id === tab.id) ? 1 : 0) ) );
@@ -395,10 +611,20 @@ browser.menus.create({
     parentId: "State",
 	contexts: ["tab"],
 	onclick: async (info, tab) => {
-        let query = queryBase;
-            query['autodiscardable'] = true;
-        if(tempListEmpty){
-            query['highlighted'] = true;
+        let query;
+        if(multipleHighlighted) {
+            query = {
+                hidden: false,
+                currentWindow: true,
+                highlighted: true,
+                autodiscardable: true
+            }
+        }else{
+            query = {
+                hidden: false,
+                currentWindow: true,
+                autodiscardable: true
+            }
         }
 		const tabs = (await browser.tabs.query(query))
             .sort((a,b) => ((a.id === tab.id) ? -1 : ((b.id === tab.id) ? 1 : 0) ) );
@@ -432,14 +658,15 @@ browser.menus.create({
             return;
         }
 
-        const query = queryBase;
-              query['url'] = '<all_urls>';
+        const query = {
+                hidden: false,
+                currentWindow: true,
+                url: '<all_urls>'
+        }
         if(multipleHighlighted) {
-              // more than one TabIsHighlighted
-              // only run the scripts on the highlighted tabs
-              // and the ones still highlighted match the script
               query['highlighted'] = true;
         }
+
 		const tabs = (await browser.tabs.query(query))
 
         const tabsToHL = [];
@@ -495,6 +722,7 @@ browser.menus.create({
 
 function handleHighlighted(highlightInfo) {
     multipleHighlighted = (highlightInfo.tabIds.length > 1);
+    console.log('multipleHighlighted', multipleHighlighted);
 }
 
 browser.tabs.onHighlighted.addListener(handleHighlighted);
