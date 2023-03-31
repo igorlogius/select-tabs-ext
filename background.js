@@ -89,6 +89,12 @@ async function getAncestorTabs(ancestorTabId, max_relation_depth = -1) {
 // -------------
 
 browser.menus.create({
+  id: "All",
+  title: "All",
+  contexts: ["tab"],
+});
+
+browser.menus.create({
   id: "Invert Selection",
   title: "Invert Selection",
   contexts: ["tab"],
@@ -279,10 +285,18 @@ browser.menus.create({
 
 function handleHighlighted(highlightInfo) {
   multipleHighlighted = highlightInfo.tabIds.length > 1;
+  highlightedTabIds = highlightInfo.tabIds;
 }
 
 const run = {
-  "Invert Selection": async (/*info, tab*/) => {
+  All: async (/*info, tab*/) => {
+    const tabs = await browser.tabs.query({
+      currentWindow: true,
+      hidden: false,
+    });
+    highlight(tabs);
+  },
+  "Invert Selection": async (info, tab) => {
     // Previously highlighted tabs not included in tabs will stop being highlighted.
     // The first tab in tabs will become active.
     // ref. https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/highlight
@@ -837,14 +851,17 @@ const run = {
 
 browser.tabs.onHighlighted.addListener(handleHighlighted);
 
-browser.menus.onClicked.addListener((info, tab) => {
-  console.log(`onClicked ${info.menuItemId} clicked in tab ${tab.id}`);
-  run[info.menuItemId](info, tab);
+browser.menus.onClicked.addListener(async (info /*, tab*/) => {
+  const tab = (
+    await browser.tabs.query({ currentWindow: true, active: true })
+  )[0];
+  run[info.menuItemId](null, tab);
 });
 
-browser.commands.onCommand.addListener( async (command) => {
-  const tab = await browser.tabs.query({currentWindow:true, active: true})[0];
-  console.log(`onCommand ${command} clicked in tab ${tab.id}`);
+browser.commands.onCommand.addListener(async (command) => {
+  const tab = (
+    await browser.tabs.query({ currentWindow: true, active: true })
+  )[0];
   run[command](null, tab);
 });
 
