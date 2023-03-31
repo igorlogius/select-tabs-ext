@@ -33,6 +33,30 @@
       }
     ]
   },
+
+  "commands": {
+    "Invert": {},
+    "Same Container": {},
+    "Descendents": {},
+    "Siblings": {},
+    "Children": {},
+    "Parent": {},
+    "Ancestors": {},
+    "Same URL": {},
+    "Same Origin": {},
+    "Same Domain": {},
+    "Same Port": {},
+    "Same Protocol": {},
+    "To the Left": {},
+    "To the Right": {},
+    "Pinned": {},
+    "Muted": {},
+    "Loading": {},
+    "Complete": {},
+    "Audible": {},
+    "Auto Discardable": {},
+    "UserScripts": {}
+  },
   "icons": {
     "512": "icon.png"
   },
@@ -42,5 +66,5 @@
     "page": "options.html"
   },
   "permissions": ["storage", "tabs", "menus", "notifications", "<all_urls>"],
-  "version": "1.1.1"
+  "version": "1.2.1"
 }
