@@ -100,6 +100,8 @@ browser.menus.create({
   contexts: ["tab"],
 });
 
+// -------------
+
 browser.menus.create({
   id: "Directional",
   title: "Directional",
@@ -124,12 +126,8 @@ browser.menus.create({
   type: "separator",
   contexts: ["tab"],
 });
-browser.menus.create({
-  id: "Last Access Time",
-  title: "Last Access Time",
-  type: "separator",
-  contexts: ["tab"],
-});
+
+// -------------
 
 browser.menus.create({
   id: "Same Container",
@@ -137,9 +135,29 @@ browser.menus.create({
   contexts: ["tab"],
 });
 
+browser.menus.create({
+  id: "Bookmarked",
+  title: "Bookmarked",
+  contexts: ["tab"],
+});
+
+browser.menus.create({
+  id: "UserScripts",
+  title: "UserScripts",
+  contexts: ["tab"],
+});
+
+
+browser.menus.create({
+  type: "separator",
+  contexts: ["tab"],
+});
+
+
 // Relationship
 
 browser.menus.create({
+  id: "Descendents",
   title: "Descendents",
   parentId: "Relationship",
   contexts: ["tab"],
@@ -173,20 +191,9 @@ browser.menus.create({
   contexts: ["tab"],
 });
 
-// URL (can be done by Userscript too )
-
 browser.menus.create({
   id: "Same URL",
   title: "Same URL",
-  parentId: "URL Property",
-  contexts: ["tab"],
-});
-
-// URL (can be done by Userscript too )
-
-browser.menus.create({
-  id: "Same Origin",
-  title: "Same Origin",
   parentId: "URL Property",
   contexts: ["tab"],
 });
@@ -198,23 +205,10 @@ browser.menus.create({
   contexts: ["tab"],
 });
 
-browser.menus.create({
-  id: "Same Port",
-  title: "Same Port",
-  parentId: "URL Property",
-  contexts: ["tab"],
-});
-
-browser.menus.create({
-  id: "Same Protocol",
-  title: "Same Protocol",
-  parentId: "URL Property",
-  contexts: ["tab"],
-});
-
 // Positional
 
 browser.menus.create({
+  id: "To the Left",
   title: "To the Left",
   parentId: "Directional",
   contexts: ["tab"],
@@ -227,7 +221,7 @@ browser.menus.create({
   contexts: ["tab"],
 });
 
-//
+// URL Property
 browser.menus.create({
   id: "Pinned",
   title: "Pinned",
@@ -250,36 +244,9 @@ browser.menus.create({
 });
 
 browser.menus.create({
-  id: "Complete",
-  title: "Complete",
-  parentId: "State",
-  contexts: ["tab"],
-});
-
-browser.menus.create({
-  id: "Undefined",
-  title: "Undefined",
-  parentId: "State",
-  contexts: ["tab"],
-});
-
-browser.menus.create({
   id: "Audible",
   title: "Audible",
   parentId: "State",
-  contexts: ["tab"],
-});
-
-browser.menus.create({
-  id: "Auto Discardable",
-  title: "Auto Discardable",
-  parentId: "State",
-  contexts: ["tab"],
-});
-
-browser.menus.create({
-  id: "UserScripts",
-  title: "UserScripts",
   contexts: ["tab"],
 });
 
@@ -289,7 +256,7 @@ function handleHighlighted(highlightInfo) {
 }
 
 const run = {
-  All: async (/*info, tab*/) => {
+  "All": async (/*info, tab*/) => {
     const tabs = await browser.tabs.query({
       currentWindow: true,
       hidden: false,
@@ -327,7 +294,7 @@ const run = {
       highlight(tabs);
     }
   },
-  Descendents: async (info, tab) => {
+  "Descendents": async (info, tab) => {
     allTabs = await browser.tabs.query({
       currentWindow: true,
       hidden: false,
@@ -348,7 +315,7 @@ const run = {
     }
     highlight(getDescendentTabs(tab.id).filter((t) => t.id !== tab.id));
   },
-  Siblings: async (info, tab) => {
+  "Siblings": async (info, tab) => {
     allTabs = await browser.tabs.query({
       hidden: false,
       currentWindow: true,
@@ -370,7 +337,7 @@ const run = {
       getDescendentTabs(tab.openerTabId, 1).filter((t) => t.id !== tab.id)
     );
   },
-  Children: async (info, tab) => {
+  "Children": async (info, tab) => {
     allTabs = await browser.tabs.query({
       hidden: false,
       currentWindow: true,
@@ -390,7 +357,7 @@ const run = {
     }
     highlight(getDescendentTabs(tab.id, 1));
   },
-  Parent: async (info, tab) => {
+  "Parent": async (info, tab) => {
     let query;
     if (multipleHighlighted) {
       query = {
@@ -410,7 +377,7 @@ const run = {
 
     highlight(tabs);
   },
-  Ancestors: async (info, tab) => {
+  "Ancestors": async (info, tab) => {
     allTabs = await browser.tabs.query({
       hidden: false,
       currentWindow: true,
@@ -449,26 +416,6 @@ const run = {
     const tabs = await browser.tabs.query(query);
     highlight(tabs);
   },
-  "Same Origin": async (info, tab) => {
-    let query;
-
-    if (multipleHighlighted) {
-      query = {
-        hidden: false,
-        currentWindow: true,
-        highlighted: true,
-        url: new URL(tab.url).origin + "/*",
-      };
-    } else {
-      query = {
-        hidden: false,
-        currentWindow: true,
-        url: new URL(tab.url).origin + "/*",
-      };
-    }
-    const tabs = await browser.tabs.query(query);
-    highlight(tabs);
-  },
   "Same Domain": async (info, tab) => {
     let query;
     const hostname = new URL(tab.url).hostname;
@@ -485,50 +432,6 @@ const run = {
         hidden: false,
         currentWindow: true,
         url: "*://" + hostname + "/*",
-      };
-    }
-    const tabs = (await browser.tabs.query(query)).sort((a, b) =>
-      a.id === tab.id ? -1 : b.id === tab.id ? 1 : 0
-    );
-    highlight(tabs);
-  },
-  "Same Port": async (info, tab) => {
-    let query;
-    const port = new URL(tab.url).port;
-    if (multipleHighlighted) {
-      query = {
-        hidden: false,
-        currentWindow: true,
-        highlighted: true,
-        url: "*://*:" + port + "/*",
-      };
-    } else {
-      query = {
-        hidden: false,
-        currentWindow: true,
-        url: "*://*:" + port + "/*",
-      };
-    }
-    const tabs = (await browser.tabs.query(query)).sort((a, b) =>
-      a.id === tab.id ? -1 : b.id === tab.id ? 1 : 0
-    );
-    highlight(tabs);
-  },
-  "Same Protocol": async (info, tab) => {
-    let query;
-    const protocol = new URL(tab.url).hostname;
-    if (multipleHighlighted) {
-      query = {
-        hidden: false,
-        currentWindow: true,
-        highlighted: true,
-        url: protocol + "//*/*",
-      };
-    } else {
-      query = {
-        hidden: false,
-        currentWindow: true,
-        url: protocol + "//*/*",
       };
     }
     const tabs = (await browser.tabs.query(query)).sort((a, b) =>
@@ -635,44 +538,6 @@ const run = {
       .sort((a, b) => (a.id === tab.id ? -1 : b.id === tab.id ? 1 : 0));
     highlight(tabs);
   },
-  Complete: async (info, tab) => {
-    let query;
-    if (multipleHighlighted) {
-      query = {
-        hidden: false,
-        currentWindow: true,
-        highlighted: true,
-      };
-    } else {
-      query = {
-        hidden: false,
-        currentWindow: true,
-      };
-    }
-    const tabs = (await browser.tabs.query(query))
-      .filter((t) => t.status === "complete")
-      .sort((a, b) => (a.id === tab.id ? -1 : b.id === tab.id ? 1 : 0));
-    highlight(tabs);
-  },
-  Undefined: async (info, tab) => {
-    let query;
-    if (multipleHighlighted) {
-      query = {
-        hidden: false,
-        currentWindow: true,
-        highlighted: true,
-      };
-    } else {
-      query = {
-        hidden: false,
-        currentWindow: true,
-      };
-    }
-    const tabs = (await browser.tabs.query(query))
-      .filter((t) => t.status !== "loading" && t.status !== "complete")
-      .sort((a, b) => (a.id === tab.id ? -1 : b.id === tab.id ? 1 : 0));
-    highlight(tabs);
-  },
   Audible: async (info, tab) => {
     let query;
     if (multipleHighlighted) {
@@ -694,25 +559,19 @@ const run = {
     );
     highlight(tabs);
   },
-  "Auto Discardable": async (info, tab) => {
-    let query;
-    if (multipleHighlighted) {
-      query = {
-        hidden: false,
-        currentWindow: true,
-        highlighted: true,
-        autodiscardable: true,
-      };
-    } else {
-      query = {
-        hidden: false,
-        currentWindow: true,
-        autodiscardable: true,
-      };
-    }
-    const tabs = (await browser.tabs.query(query)).sort((a, b) =>
-      a.id === tab.id ? -1 : b.id === tab.id ? 1 : 0
+  Bookmarked: async (info, tab) => {
+    const bookmarkedURLs = new Set(
+      (await browser.bookmarks.search({}))
+        .filter((m) => typeof m.url === "string")
+        .map((m) => m.url.trim())
     );
+    const tabs = [];
+    for (const t of await browser.tabs.query({ currentWindow: true })) {
+      console.debug(t.url, bookmarkedURLs.has(t.url));
+      if (bookmarkedURLs.has(t.url)) {
+        tabs.push(t);
+      }
+    }
     highlight(tabs);
   },
   UserScripts: async (info, tab) => {
