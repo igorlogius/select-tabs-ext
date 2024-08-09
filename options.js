@@ -50,7 +50,7 @@ addbtn.addEventListener("click", async () => {
       tags: "",
       code: "",
     },
-    true
+    true,
   ); // add at the top
   hightlightChange();
 });
@@ -148,7 +148,7 @@ impbtn.addEventListener("input", function () {
             tags: selector.tags || "",
             code: selector.code || "",
           },
-          false
+          false,
         );
         imported_something = true;
       });

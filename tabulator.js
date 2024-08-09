@@ -104,7 +104,7 @@
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
+        "this hasn't been initialised - super() hasn't been called",
       );
     }
 
@@ -176,7 +176,7 @@
 
   function _nonIterableSpread() {
     throw new TypeError(
-      "Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."
+      "Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.",
     );
   }
 
@@ -214,7 +214,7 @@
       }
 
       throw new TypeError(
-        "Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."
+        "Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.",
       );
     }
 
@@ -320,7 +320,7 @@
             undefined,
             undefined,
             undefined,
-            silent
+            silent,
           );
         }, //////////////////////////////////////////
         ///////////// Localization ///////////////
@@ -334,7 +334,7 @@
           return (_this$table$modules$l =
             this.table.modules.localize).getText.apply(
             _this$table$modules$l,
-            arguments
+            arguments,
           );
         },
       },
@@ -346,7 +346,7 @@
           return (_this$table$modules$l2 =
             this.table.modules.localize).bind.apply(
             _this$table$modules$l2,
-            arguments
+            arguments,
           );
         },
       },
@@ -358,7 +358,7 @@
           return (_this$table$modules$l3 =
             this.table.modules.localize).getLocale.apply(
             _this$table$modules$l3,
-            arguments
+            arguments,
           );
         }, //////////////////////////////////////////
         ////////// Inter Table Comms /////////////
@@ -372,7 +372,7 @@
           return (_this$table$modules$c =
             this.table.modules.comms).getConnections.apply(
             _this$table$modules$c,
-            arguments
+            arguments,
           );
         },
       },
@@ -383,7 +383,7 @@
 
           return (_this$table$modules$c2 = this.table.modules.comms).send.apply(
             _this$table$modules$c2,
-            arguments
+            arguments,
           );
         }, //////////////////////////////////////////
         //////////////// Layout  /////////////////
@@ -410,7 +410,7 @@
 
           return (_this$table$eventBus = this.table.eventBus).subscribe.apply(
             _this$table$eventBus,
-            arguments
+            arguments,
           );
         },
       },
@@ -422,7 +422,7 @@
           return (_this$table$eventBus2 =
             this.table.eventBus).unsubscribe.apply(
             _this$table$eventBus2,
-            arguments
+            arguments,
           );
         },
       },
@@ -440,7 +440,7 @@
           return (_this$table$eventBus3 =
             this.table.eventBus).subscriptionChange.apply(
             _this$table$eventBus3,
-            arguments
+            arguments,
           );
         },
       },
@@ -451,7 +451,7 @@
 
           return (_this$table$eventBus4 = this.table.eventBus).dispatch.apply(
             _this$table$eventBus4,
-            arguments
+            arguments,
           );
         },
       },
@@ -462,7 +462,7 @@
 
           return (_this$table$eventBus5 = this.table.eventBus).chain.apply(
             _this$table$eventBus5,
-            arguments
+            arguments,
           );
         },
       },
@@ -473,7 +473,7 @@
 
           return (_this$table$eventBus6 = this.table.eventBus).confirm.apply(
             _this$table$eventBus6,
-            arguments
+            arguments,
           );
         },
       },
@@ -485,7 +485,7 @@
           return (_this$table$externalE =
             this.table.externalEvents).dispatch.apply(
             _this$table$externalE,
-            arguments
+            arguments,
           );
         },
       },
@@ -503,7 +503,7 @@
           return (_this$table$externalE2 =
             this.table.externalEvents).subscriptionChange.apply(
             _this$table$externalE2,
-            arguments
+            arguments,
           );
         }, //////////////////////////////////////////
         //////////////// Options /////////////////
@@ -553,7 +553,7 @@
             return target._column.table.componentFunctionBinder.handle(
               "column",
               target._column,
-              name
+              name,
             );
           }
         },
@@ -692,7 +692,7 @@
             this._column.table.columnManager.moveColumn(
               this._column,
               toColumn,
-              after
+              after,
             );
           } else {
             console.warn("Move Error - No matching column found:", toColumn);
@@ -782,7 +782,7 @@
             return target._cell.table.componentFunctionBinder.handle(
               "cell",
               target._cell,
-              name
+              name,
             );
           }
         },
@@ -1015,7 +1015,7 @@
                 if (val != null) {
                   console.warn(
                     "Format Error - Formatter has returned a type of object, the only valid formatter object return is an instance of Node, the formatter returned:",
-                    val
+                    val,
                   );
                 }
               }
@@ -1102,7 +1102,7 @@
             if (this.column.definition.cellEdited) {
               this.column.definition.cellEdited.call(
                 this.table,
-                this.getComponent()
+                this.getComponent(),
               );
             }
 
@@ -1111,7 +1111,7 @@
             if (this.subscribedExternal("dataChanged")) {
               this.dispatchExternal(
                 "dataChanged",
-                this.table.rowManager.getData()
+                this.table.rowManager.getData(),
               );
             }
           }
@@ -1130,7 +1130,7 @@
                 "cell-value-changing",
                 [this, value],
                 null,
-                value
+                value,
               );
             }
           }
@@ -1402,7 +1402,7 @@
 
           this.definition = this.table.columnManager.optionsList.generate(
             Column.defaultOptionList,
-            this.definition
+            this.definition,
           );
         },
       },
@@ -1417,7 +1417,7 @@
                 "Invalid column definition option in '" +
                   (_this2.field || _this2.definition.title) +
                   "' column:",
-                key
+                key,
               );
             }
           });
@@ -1580,7 +1580,7 @@
               },
               {
                 passive: true,
-              }
+              },
             );
             this.element.addEventListener("touchend", function (e) {
               if (tap) {
@@ -1622,7 +1622,7 @@
               },
               {
                 passive: true,
-              }
+              },
             );
             this.element.addEventListener("touchend", function (e) {
               clearTimeout(tapHold);
@@ -1714,7 +1714,7 @@
 
               _this7.dispatchExternal(
                 "columnTitleChanged",
-                _this7.getComponent()
+                _this7.getComponent(),
               );
             });
             titleHolderElement.appendChild(titleElement);
@@ -1731,13 +1731,13 @@
               this.langBind("columns|" + def.field, function (text) {
                 _this7._formatColumnHeaderTitle(
                   titleHolderElement,
-                  text || def.title || "&nbsp;"
+                  text || def.title || "&nbsp;",
                 );
               });
             } else {
               this._formatColumnHeaderTitle(
                 titleHolderElement,
-                def.title || "&nbsp;"
+                def.title || "&nbsp;",
               );
             }
           }
@@ -1754,7 +1754,7 @@
             null,
             function () {
               return title;
-            }
+            },
           );
 
           switch (_typeof(contents)) {
@@ -1765,7 +1765,7 @@
                 el.innerHTML = "";
                 console.warn(
                   "Format Error - Title formatter has returned a type of object, the only valid formatter object return is an instance of Node, the formatter returned:",
-                  contents
+                  contents,
                 );
               }
 
@@ -1867,7 +1867,7 @@
             this.groupElement.appendChild(column.getElement());
           } else {
             console.warn(
-              "Column Warning - Column being attached to another column instead of column group"
+              "Column Warning - Column being attached to another column instead of column group",
             );
           }
         }, //vertically align header in column
@@ -2032,7 +2032,7 @@
             this.dispatchExternal(
               "columnVisibilityChanged",
               this.getComponent(),
-              false
+              false,
             );
           } else {
             this.hide();
@@ -2065,7 +2065,7 @@
               this.dispatchExternal(
                 "columnVisibilityChanged",
                 this.getComponent(),
-                true
+                true,
               );
             }
 
@@ -2100,7 +2100,7 @@
               this.dispatchExternal(
                 "columnVisibilityChanged",
                 this.getComponent(),
-                false
+                false,
               );
             }
 
@@ -2159,7 +2159,7 @@
         value: function setWidthActual(width) {
           if (isNaN(width)) {
             width = Math.floor(
-              (this.table.element.clientWidth / 100) * parseInt(width)
+              (this.table.element.clientWidth / 100) * parseInt(width),
             );
           }
 
@@ -2420,18 +2420,18 @@
                 });
             } else {
               console.error(
-                "Column Update Error - The updateDefinition function is only available on ungrouped columns"
+                "Column Update Error - The updateDefinition function is only available on ungrouped columns",
               );
               return Promise.reject(
-                "Column Update Error - The updateDefinition function is only available on columns, not column groups"
+                "Column Update Error - The updateDefinition function is only available on columns, not column groups",
               );
             }
           } else {
             console.error(
-              "Column Update Error - The updateDefinition function is only available on ungrouped columns"
+              "Column Update Error - The updateDefinition function is only available on ungrouped columns",
             );
             return Promise.reject(
-              "Column Update Error - The updateDefinition function is only available on columns, not column groups"
+              "Column Update Error - The updateDefinition function is only available on columns, not column groups",
             );
           }
         },
@@ -2952,21 +2952,21 @@
 
           if (this.options("layout") == "fitDataTable") {
             console.warn(
-              "Horizontal Virtual DOM is not compatible with fitDataTable layout mode"
+              "Horizontal Virtual DOM is not compatible with fitDataTable layout mode",
             );
             ok = false;
           }
 
           if (this.options("responsiveLayout")) {
             console.warn(
-              "Horizontal Virtual DOM is not compatible with responsive columns"
+              "Horizontal Virtual DOM is not compatible with responsive columns",
             );
             ok = false;
           }
 
           if (this.options("rtl")) {
             console.warn(
-              "Horizontal Virtual DOM is not currently compatible with RTL text direction"
+              "Horizontal Virtual DOM is not currently compatible with RTL text direction",
             );
             ok = false;
           }
@@ -2978,7 +2978,7 @@
 
             if (frozen) {
               console.warn(
-                "Horizontal Virtual DOM is not compatible with frozen columns"
+                "Horizontal Virtual DOM is not compatible with frozen columns",
               );
               ok = false;
             }
@@ -3179,7 +3179,7 @@
                     colEnd++
                   ) {
                     this.table.columnManager.columnsByIndex[colEnd].setWidth(
-                      this.fitDataColAvg
+                      this.fitDataColAvg,
                     );
                   }
 
@@ -3408,7 +3408,7 @@
               this.colPositionAdjust(
                 this.rightCol + 2,
                 this.columns.length,
-                widthDiff
+                widthDiff,
               );
             }
 
@@ -3488,7 +3488,7 @@
       _this.optionsList = new OptionsList(
         _this.table,
         "column definition",
-        defaultColumnOptions
+        defaultColumnOptions,
       );
       _this.renderer = null;
       return _this;
@@ -3503,7 +3503,7 @@
           this.element = this.createHeaderElement();
           this.element.insertBefore(
             this.headersElement,
-            this.element.firstChild
+            this.element.firstChild,
           );
           this.subscribe("scroll-horizontal", this.scrollHorizontal.bind(this));
         },
@@ -3527,13 +3527,13 @@
             this.renderer = new renderClass(
               this.table,
               this.element,
-              this.tableElement
+              this.tableElement,
             );
             this.renderer.initialize();
           } else {
             console.error(
               "Unable to find matching renderer:",
-              table.options.renderHorizontal
+              table.options.renderHorizontal,
             );
           }
         },
@@ -3652,7 +3652,7 @@
                 case "function":
                   this.table.options.columns = definitions.call(
                     this.table,
-                    cols
+                    cols,
                   );
                   break;
 
@@ -3736,7 +3736,7 @@
               this.columns.unshift(column);
               this.headersElement.insertBefore(
                 column.getElement(),
-                this.headersElement.firstChild
+                this.headersElement.firstChild,
               );
             } else {
               this.columns.push(column);
@@ -3789,7 +3789,7 @@
           this.columns.forEach(function (column) {
             column.verticalAlign(
               _this3.table.options.columnHeaderVertAlign,
-              minHeight
+              minHeight,
             );
           });
           this.table.rowManager.adjustTableSize();
@@ -3965,7 +3965,7 @@
             this.dispatchExternal(
               "columnMoved",
               from.getComponent(),
-              this.table.columnManager.getComponents()
+              this.table.columnManager.getComponents(),
             );
           }
         },
@@ -3977,7 +3977,7 @@
           from,
           to,
           after,
-          updateRows
+          updateRows,
         ) {
           var fromIndex = columns.indexOf(from),
             toIndex,
@@ -4060,9 +4060,9 @@
                 Math.min(
                   left,
                   _this5.table.rowManager.element.scrollWidth -
-                    _this5.table.rowManager.element.clientWidth
+                    _this5.table.rowManager.element.clientWidth,
                 ),
-                0
+                0,
               );
 
               _this5.table.rowManager.scrollHorizontal(left);
@@ -4217,7 +4217,7 @@
             return target._row.table.componentFunctionBinder.handle(
               "row",
               target._row,
-              name
+              name,
             );
           }
         },
@@ -4593,7 +4593,7 @@
             "row-data-init-before",
             [this, data],
             undefined,
-            data
+            data,
           );
           this.dispatch("row-data-init-after", this);
         }, //update the rows data
@@ -4622,7 +4622,7 @@
               "row-data-changing",
               [_this2, tempData, updatedData],
               null,
-              updatedData
+              updatedData,
             ); //set data
 
             for (var attrname in newRowData) {
@@ -4671,7 +4671,7 @@
             if (_this2.subscribedExternal("dataChanged")) {
               _this2.dispatchExternal(
                 "dataChanged",
-                _this2.table.rowManager.getData()
+                _this2.table.rowManager.getData(),
               );
             }
 
@@ -4687,7 +4687,7 @@
               "row-data-retrieve",
               [this, transform],
               null,
-              this.data
+              this.data,
             );
           }
 
@@ -4923,7 +4923,7 @@
             Math.abs(
               this.elementVertical.scrollTop +
                 this.elementVertical.clientHeight -
-                rowTop
+                rowTop,
             )
           );
         },
@@ -5061,7 +5061,7 @@
           this._virtualRenderFill(
             topRow === false ? this.rows.length - 1 : topRow,
             true,
-            topOffset || 0
+            topOffset || 0,
           );
 
           this.scrollColumns(left);
@@ -5090,8 +5090,8 @@
               Math.floor(
                 (this.elementVertical.scrollTop /
                   this.elementVertical.scrollHeight) *
-                  rows.length
-              )
+                  rows.length,
+              ),
             );
 
             this.scrollColumns(left);
@@ -5230,7 +5230,7 @@
 
             if (heightOccupied < containerHeight) {
               position -= Math.ceil(
-                (containerHeight - heightOccupied) / this.vDomRowHeight
+                (containerHeight - heightOccupied) / this.vDomRowHeight,
               );
 
               if (position < 0) {
@@ -5241,9 +5241,9 @@
             topPad = Math.min(
               Math.max(
                 Math.floor(this.vDomWindowBuffer / this.vDomRowHeight),
-                this.vDomWindowMinMarginRows
+                this.vDomWindowMinMarginRows,
               ),
-              position
+              position,
             );
             position -= topPad;
           }
@@ -5307,7 +5307,7 @@
                         this.vDomTopPad -
                         rowsHeight -
                         topPadHeight,
-                      0
+                      0,
                     );
             }
 
@@ -5327,7 +5327,7 @@
 
             this.scrollTop = Math.min(
               this.scrollTop,
-              this.elementVertical.scrollHeight - containerHeight
+              this.elementVertical.scrollHeight - containerHeight,
             ); //adjust for horizontal scrollbar if present (and not at top of table)
 
             if (
@@ -5886,7 +5886,7 @@
               } else {
                 console.warn(
                   "Data Loading Warning - Invalid row data detected and ignored, expecting object but received:",
-                  def
+                  def,
                 );
               }
             });
@@ -5898,7 +5898,7 @@
               "Data Loading Error - Unable to process data due to invalid data type \nExpecting: array \nReceived: ",
               _typeof(data),
               "\nData:     ",
-              data
+              data,
             );
           }
         },
@@ -6052,7 +6052,7 @@
             "row-adding-index",
             [row, index, top],
             null,
-            index
+            index,
           );
 
           if (index) {
@@ -6073,7 +6073,7 @@
               this.activeRows.splice(
                 top ? activeIndex : activeIndex + 1,
                 0,
-                row
+                row,
               );
             }
 
@@ -6100,7 +6100,7 @@
           if (this.subscribedExternal("dataChanged")) {
             this.dispatchExternal(
               "dataChanged",
-              this.table.rowManager.getData()
+              this.table.rowManager.getData(),
             );
           }
 
@@ -6296,7 +6296,7 @@
             });
           } else {
             console.error(
-              "Data pipeline handlers must have a priority in order to be registered"
+              "Data pipeline handlers must have a priority in order to be registered",
             );
           }
         },
@@ -6314,7 +6314,7 @@
             });
           } else {
             console.error(
-              "Display pipeline handlers must have a priority in order to be registered"
+              "Display pipeline handlers must have a priority in order to be registered",
             );
           }
         }, //set active data set
@@ -6324,7 +6324,7 @@
         value: function refreshActiveData(
           handler,
           skipStage,
-          renderInPosition
+          renderInPosition,
         ) {
           var table = this.table,
             stage = "",
@@ -6370,7 +6370,7 @@
               } else {
                 console.error(
                   "Unable to refresh data, invalid handler provided",
-                  handler
+                  handler,
                 );
                 return;
               }
@@ -6412,14 +6412,14 @@
               case "dataPipeline":
                 for (var i = index; i < this.dataPipeline.length; i++) {
                   var result = this.dataPipeline[i].handler(
-                    this.activeRowsPipeline[i].slice(0)
+                    this.activeRowsPipeline[i].slice(0),
                   );
                   this.activeRowsPipeline[i + 1] =
                     result || this.activeRowsPipeline[i].slice(0);
                 }
 
                 this.setActiveRows(
-                  this.activeRowsPipeline[this.dataPipeline.length]
+                  this.activeRowsPipeline[this.dataPipeline.length],
                 );
                 this.regenerateRowNumbers();
 
@@ -6431,14 +6431,14 @@
                 for (var _i = index; _i < this.displayPipeline.length; _i++) {
                   var _result = this.displayPipeline[_i].handler(
                     (_i ? this.getDisplayRows(_i - 1) : this.activeRows).slice(
-                      0
+                      0,
                     ),
-                    renderInPosition
+                    renderInPosition,
                   );
 
                   this.setDisplayRows(
                     _result || this.getDisplayRows(_i - 1).slice(0),
-                    _i
+                    _i,
                   );
                 }
             }
@@ -6614,7 +6614,7 @@
             this.renderer = new renderClass(
               this.table,
               this.element,
-              this.tableElement
+              this.tableElement,
             );
             this.renderer.initialize();
 
@@ -6626,7 +6626,7 @@
           } else {
             console.error(
               "Unable to find matching renderer:",
-              table.options.renderVertical
+              table.options.renderVertical,
             );
           }
         },
@@ -6699,7 +6699,7 @@
           if (this.table.options.placeholder) {
             this.table.options.placeholder.setAttribute(
               "tabulator-render-mode",
-              this.renderMode
+              this.renderMode,
             );
             this.getElement().appendChild(this.table.options.placeholder);
             this.table.options.placeholder.style.width =
@@ -6715,7 +6715,7 @@
             this.table.options.placeholder.parentNode
           ) {
             this.table.options.placeholder.parentNode.removeChild(
-              this.table.options.placeholder
+              this.table.options.placeholder,
             );
           }
         },
@@ -6757,7 +6757,7 @@
                   ? this.table.footerManager
                       .getElement()
                       .getBoundingClientRect().height
-                  : 0)
+                  : 0),
             );
 
             if (this.fixedHeight) {
@@ -6812,7 +6812,7 @@
             this.refreshActiveData(
               this.redrawBlockRestoreConfig.handler,
               this.redrawBlockRestoreConfig.skipStage,
-              this.redrawBlockRestoreConfig.renderInPosition
+              this.redrawBlockRestoreConfig.renderInPosition,
             );
             this.redrawBlockRestoreConfig = false;
           } else {
@@ -6913,7 +6913,7 @@
                 } else {
                   this.external = true;
                   this.element = document.querySelector(
-                    this.table.options.footerElement
+                    this.table.options.footerElement,
                   );
                 }
 
@@ -7084,7 +7084,7 @@
 
             _this2.subscribe(
               key + "-mouseover",
-              _this2.pseudoTrackers[key].subscriber
+              _this2.pseudoTrackers[key].subscriber,
             );
           });
           this.pseudoTracking = true;
@@ -7151,7 +7151,7 @@
                 var key = comp + "-" + listener;
                 this.subscriptionChange(
                   key,
-                  this.subscriptionChanged.bind(this, comp, listener)
+                  this.subscriptionChanged.bind(this, comp, listener),
                 );
               }
             } catch (err) {
@@ -7343,7 +7343,7 @@
                         component = targets["row"].findCell(target);
                       } else {
                         console.warn(
-                          "Event Target Lookup Error - The row this cell is attached to cannot be found, has the table been reinitialized without being destroyed first?"
+                          "Event Target Lookup Error - The row this cell is attached to cannot be found, has the table been reinitialized without being destroyed first?",
                         );
                       }
                     }
@@ -7425,7 +7425,7 @@
               "Unable to bind component handler, a matching function name is already bound",
               type,
               funcName,
-              hanlder
+              hanlder,
             );
           } else {
             this.bindings[type][funcName] = handler;
@@ -7448,7 +7448,7 @@
                   type +
                   " component does not have a " +
                   name +
-                  " function, have you checked that you have the correct Tabulator module installed?"
+                  " function, have you checked that you have the correct Tabulator module installed?",
               );
             }
           }
@@ -7550,21 +7550,21 @@
               "data-params",
               [data, config, silent],
               params || {},
-              params || {}
+              params || {},
             );
             params = this.mapParams(params, this.table.options.dataSendParams);
             var result = this.chain(
               "data-load",
               [data, params, config, silent],
               false,
-              Promise.resolve([])
+              Promise.resolve([]),
             );
             return result
               .then(function (response) {
                 if (!Array.isArray(response) && _typeof(response) == "object") {
                   response = _this2.mapParams(
                     response,
-                    _this2.objectInvert(_this2.table.options.dataReceiveParams)
+                    _this2.objectInvert(_this2.table.options.dataReceiveParams),
                   );
                 }
 
@@ -7572,7 +7572,7 @@
                   "data-loaded",
                   response,
                   null,
-                  response
+                  response,
                 );
 
                 if (requestNo == _this2.requestOrder) {
@@ -7585,7 +7585,7 @@
                   }
                 } else {
                   console.warn(
-                    "Data Load Response Blocked - An active data load request was blocked by an attempt to change table data while the request was being made"
+                    "Data Load Response Blocked - An active data load request was blocked by an attempt to change table data while the request was being made",
                   );
                 }
               })
@@ -7767,7 +7767,7 @@
                 console.warn(
                   "Cannot remove event, no matching event found:",
                   key,
-                  callback
+                  callback,
                 );
                 return;
               }
@@ -7914,7 +7914,7 @@
                 console.warn(
                   "Cannot remove event, no matching event found:",
                   key,
-                  callback
+                  callback,
                 );
                 return;
               }
@@ -8031,7 +8031,7 @@
 
             (_console2 = console).log.apply(
               _console2,
-              _toConsumableArray(args)
+              _toConsumableArray(args),
             );
           }
 
@@ -8050,7 +8050,7 @@
 
             (_console3 = console).log.apply(
               _console3,
-              _toConsumableArray(args)
+              _toConsumableArray(args),
             );
           }
 
@@ -8189,7 +8189,7 @@
           } else {
             console.warn(
               "Unable to bind table function, name already in use",
-              name
+              name,
             );
           }
         },
@@ -8200,7 +8200,7 @@
           return this.table.componentFunctionBinder.bind(
             component,
             func,
-            handler
+            handler,
           );
         }, ///////////////////////////////////
         ////////// Data Pipeline //////////
@@ -8218,7 +8218,7 @@
         value: function registerDisplayHandler(handler, priority) {
           this.table.rowManager.registerDisplayPipelineHandler(
             handler,
-            priority
+            priority,
           );
           this._handler = handler;
         },
@@ -8234,7 +8234,7 @@
             this.table.rowManager.refreshActiveData(
               handler,
               false,
-              renderInPosition
+              renderInPosition,
             );
           }
         },
@@ -8422,7 +8422,7 @@
           undersizeCols,
           remainingSpace,
           nextColWidth,
-          shrinkCols
+          shrinkCols,
         );
       } else {
         gap = changeUnits
@@ -8500,7 +8500,7 @@
         fixedShrinkColumns,
         overflowWidth,
         Math.floor(overflowWidth / flexShrinkUnits),
-        true
+        true,
       );
     } //decrease width of last column to account for rounding errors
 
@@ -8559,7 +8559,7 @@
           } else {
             console.warn(
               "Layout Error - invalid mode set, defaulting to 'fitData' : " +
-                layout
+                layout,
             );
             this.mode = "fitData";
           }
@@ -8578,7 +8578,7 @@
         value: function layout() {
           Layout.modes[this.mode].call(
             this,
-            this.table.columnManager.columnsByIndex
+            this.table.columnManager.columnsByIndex,
           );
           this.dispatch("layout-refreshed");
         },
@@ -8666,7 +8666,7 @@
             this.table.options.columnDefaults.headerFilterPlaceholder !== false
           ) {
             this.setHeaderFilterPlaceholder(
-              this.table.options.columnDefaults.headerFilterPlaceholder
+              this.table.options.columnDefaults.headerFilterPlaceholder,
             );
           }
 
@@ -8751,13 +8751,13 @@
                 console.warn(
                   "Localization Error - Exact matching locale not found, using closest match: ",
                   desiredLocale,
-                  prefix
+                  prefix,
                 );
                 desiredLocale = prefix;
               } else {
                 console.warn(
                   "Localization Error - Matching locale not found, using default: ",
-                  desiredLocale
+                  desiredLocale,
                 );
                 desiredLocale = "default";
               }
@@ -8904,7 +8904,7 @@
           if (!connections.length && selectors) {
             console.warn(
               "Table Connection Error - No tables matching selector found",
-              selectors
+              selectors,
             );
           }
         },
@@ -8916,7 +8916,7 @@
             return this.table.modules[module].commsReceived(
               table,
               action,
-              data
+              data,
             );
           } else {
             console.warn("Inter-table Comms Error - no such module:", module);
@@ -8966,13 +8966,13 @@
                   }
                 } else {
                   console.warn(
-                    "Module Error - Invalid value type, it must be an object"
+                    "Module Error - Invalid value type, it must be an object",
                   );
                 }
               } else {
                 console.warn(
                   "Module Error - property does not exist:",
-                  property
+                  property,
                 );
               }
             } else {
@@ -9107,14 +9107,14 @@
             } else {
               console.error(
                 "Tabulator Creation Error - no element found matching selector: ",
-                element
+                element,
               );
               return false;
             }
           } else {
             console.error(
               "Tabulator Creation Error - Invalid element provided:",
-              element
+              element,
             );
             return false;
           }
@@ -9130,7 +9130,7 @@
           this.bindModules();
           this.options = this.optionsList.generate(
             Tabulator.defaultOptions,
-            options
+            options,
           );
 
           this._clearObjectPointers();
@@ -9140,10 +9140,10 @@
           this.externalEvents = new ExternalEventBus(
             this,
             this.options,
-            this.options.debugEventsExternal
+            this.options.debugEventsExternal,
           );
           this.eventBus = new InternalEventBus(
-            this.options.debugEventsInternal
+            this.options.debugEventsInternal,
           );
           this.interactionMonitor = new InteractionManager(this);
           this.dataLoader.initialize();
@@ -9248,7 +9248,7 @@
               if (_typeof(attributes[i]) == "object") {
                 newElement.setAttribute(
                   attributes[i].name,
-                  attributes[i].value
+                  attributes[i].value,
                 );
               }
             } // replace table with div element
@@ -9381,10 +9381,10 @@
 
           this.browserMobile =
             /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(
-              ua
+              ua,
             ) ||
             /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
-              ua.substr(0, 4)
+              ua.substr(0, 4),
             );
         }, ////////////////// Data Handling //////////////////
         //block table redrawing
@@ -9408,7 +9408,7 @@
             return this.dataLoader.load(data, params, config, false);
           } else {
             console.warn(
-              "setData failed - table not yet initialized. To set initial data please use the 'data' property in the table constructor."
+              "setData failed - table not yet initialized. To set initial data please use the 'data' property in the table constructor.",
             );
           }
         }, //clear data
@@ -9439,7 +9439,7 @@
             return this.dataLoader.load(data, params, config, true, true);
           } else {
             console.warn(
-              "replaceData failed - table not yet initialized. Please wait for the `tableBuilt` event before calling this function."
+              "replaceData failed - table not yet initialized. Please wait for the `tableBuilt` event before calling this function.",
             );
           }
         }, //update table data
@@ -9462,7 +9462,7 @@
               if (data) {
                 data.forEach(function (item) {
                   var row = _this2.rowManager.findRow(
-                    item[_this2.options.index]
+                    item[_this2.options.index],
                   );
 
                   if (row) {
@@ -9483,7 +9483,7 @@
             });
           } else {
             console.warn(
-              "updateData failed - table not yet initialized. Please wait for the `tableBuilt` event before calling this function."
+              "updateData failed - table not yet initialized. Please wait for the `tableBuilt` event before calling this function.",
             );
           }
         },
@@ -9518,7 +9518,7 @@
             });
           } else {
             console.warn(
-              "addData failed - table not yet initialized. Please wait for the `tableBuilt` event before calling this function."
+              "addData failed - table not yet initialized. Please wait for the `tableBuilt` event before calling this function.",
             );
           }
         }, //update table data
@@ -9542,7 +9542,7 @@
               if (data) {
                 data.forEach(function (item) {
                   var row = _this4.rowManager.findRow(
-                    item[_this4.options.index]
+                    item[_this4.options.index],
                   );
 
                   responses++;
@@ -9574,7 +9574,7 @@
             });
           } else {
             console.warn(
-              "updateOrAddData failed - table not yet initialized. Please wait for the `tableBuilt` event before calling this function."
+              "updateOrAddData failed - table not yet initialized. Please wait for the `tableBuilt` event before calling this function.",
             );
           }
         }, //get row object
@@ -9667,7 +9667,7 @@
               });
           } else {
             console.warn(
-              "addRow failed - table not yet initialized. Please wait for the `tableBuilt` event before calling this function."
+              "addRow failed - table not yet initialized. Please wait for the `tableBuilt` event before calling this function.",
             );
           }
         }, //update a row if it exitsts otherwise create it
@@ -9762,7 +9762,7 @@
             this.columnManager.setColumns(definition);
           } else {
             console.warn(
-              "setColumns failed - table not yet initialized. To set initial data please use the 'columns' property in the table constructor."
+              "setColumns failed - table not yet initialized. To set initial data please use the 'columns' property in the table constructor.",
             );
           }
         },
@@ -9802,7 +9802,7 @@
           } else {
             console.warn(
               "Column Show Error - No matching column found:",
-              field
+              field,
             );
             return false;
           }
@@ -9818,7 +9818,7 @@
           } else {
             console.warn(
               "Column Hide Error - No matching column found:",
-              field
+              field,
             );
             return false;
           }
@@ -9838,7 +9838,7 @@
           } else {
             console.warn(
               "Column Visibility Toggle Error - No matching column found:",
-              field
+              field,
             );
             return false;
           }
@@ -9865,7 +9865,7 @@
           } else {
             console.warn(
               "Column Delete Error - No matching column found:",
-              field
+              field,
             );
             return Promise.reject();
           }
@@ -9881,7 +9881,7 @@
           } else {
             console.warn(
               "Column Update Error - No matching column found:",
-              field
+              field,
             );
             return Promise.reject();
           }
@@ -9916,7 +9916,7 @@
               return _this6.columnManager.scrollToColumn(
                 column,
                 position,
-                ifVisible
+                ifVisible,
               );
             } else {
               console.warn("Scroll Error - No matching column found:", field);
@@ -9934,7 +9934,7 @@
             this.rowManager.redraw(force);
           } else {
             console.warn(
-              "redraw failed - table not yet initialized. Please wait for the `tableBuilt` event before calling this function."
+              "redraw failed - table not yet initialized. Please wait for the `tableBuilt` event before calling this function.",
             );
           }
         },
@@ -9970,7 +9970,7 @@
 
           (_this$externalEvents = this.externalEvents).dispatch.apply(
             _this$externalEvents,
-            arguments
+            arguments,
           );
         }, ////////////// Extension Management //////////////
       },
@@ -10108,7 +10108,7 @@
               } else {
                 console.warn(
                   "Accessor Error - No such accessor found, ignoring: ",
-                  value
+                  value,
                 );
               }
 
@@ -10150,7 +10150,7 @@
                           data,
                           type,
                           colCompnent,
-                          rowComponent
+                          rowComponent,
                         )
                       : accessor.params;
                   column.setFieldValue(
@@ -10161,8 +10161,8 @@
                       type,
                       params,
                       colCompnent,
-                      rowComponent
-                    )
+                      rowComponent,
+                    ),
                   );
                 }
               }
@@ -10190,13 +10190,16 @@
     if (Array.isArray(data)) {
       data.forEach(function (item, i) {
         output = output.concat(
-          generateParamsList(item, prefix ? prefix + "[" + i + "]" : i)
+          generateParamsList(item, prefix ? prefix + "[" + i + "]" : i),
         );
       });
     } else if (_typeof(data) === "object") {
       for (var key in data) {
         output = output.concat(
-          generateParamsList(data[key], prefix ? prefix + "[" + key + "]" : key)
+          generateParamsList(
+            data[key],
+            prefix ? prefix + "[" + key + "]" : key,
+          ),
         );
       }
     } else {
@@ -10214,7 +10217,7 @@
       encoded = [];
     output.forEach(function (item) {
       encoded.push(
-        encodeURIComponent(item.key) + "=" + encodeURIComponent(item.value)
+        encodeURIComponent(item.key) + "=" + encodeURIComponent(item.value),
       );
     });
     return encoded.join("&");
@@ -10262,7 +10265,7 @@
         } else {
           console.warn(
             "Ajax Error - Invalid ajaxContentType value:",
-            _this.table.options.ajaxContentType
+            _this.table.options.ajaxContentType,
           );
         }
       }
@@ -10311,13 +10314,13 @@
                   reject(error);
                   console.warn(
                     "Ajax Load Error - Invalid JSON returned",
-                    error
+                    error,
                   );
                 });
             } else {
               console.error(
                 "Ajax Load Error - Connection Error: " + response.status,
-                response.statusText
+                response.statusText,
               );
               reject(response);
             }
@@ -10340,7 +10343,7 @@
     if (Array.isArray(data)) {
       data.forEach(function (item, i) {
         output = output.concat(
-          generateParamsList$1(item, prefix ? prefix + "[" + i + "]" : i)
+          generateParamsList$1(item, prefix ? prefix + "[" + i + "]" : i),
         );
       });
     } else if (_typeof(data) === "object") {
@@ -10348,8 +10351,8 @@
         output = output.concat(
           generateParamsList$1(
             data[key],
-            prefix ? prefix + "[" + key + "]" : key
-          )
+            prefix ? prefix + "[" + key + "]" : key,
+          ),
         );
       }
     } else {
@@ -10538,20 +10541,20 @@
             this.table.options.ajaxRequesting.call(this.table, url, params) !==
             false
           ) {
-            return this.loaderPromise(url, config, params).then(function (
-              data
-            ) {
-              if (_this2.table.options.ajaxResponse) {
-                data = _this2.table.options.ajaxResponse.call(
-                  _this2.table,
-                  url,
-                  params,
-                  data
-                );
-              }
+            return this.loaderPromise(url, config, params).then(
+              function (data) {
+                if (_this2.table.options.ajaxResponse) {
+                  data = _this2.table.options.ajaxResponse.call(
+                    _this2.table,
+                    url,
+                    params,
+                    data,
+                  );
+                }
 
-              return data;
-            });
+                return data;
+              },
+            );
           } else {
             return Promise.reject();
           }
@@ -10721,7 +10724,7 @@
                   if (_this2.table.options.clipboardCopyFormatter) {
                     plain = _this2.table.options.clipboardCopyFormatter(
                       "plain",
-                      plain
+                      plain,
                     );
                   }
                 } else {
@@ -10729,7 +10732,7 @@
                     _this2.table.options.clipboardCopyConfig,
                     _this2.table.options.clipboardCopyStyled,
                     _this2.rowRange,
-                    "clipboard"
+                    "clipboard",
                   );
 
                   html =
@@ -10739,11 +10742,11 @@
                   if (_this2.table.options.clipboardCopyFormatter) {
                     plain = _this2.table.options.clipboardCopyFormatter(
                       "plain",
-                      plain
+                      plain,
                     );
                     html = _this2.table.options.clipboardCopyFormatter(
                       "html",
-                      html
+                      html,
                     );
                   }
                 }
@@ -10882,7 +10885,7 @@
               if (!this.pasteAction) {
                 console.warn(
                   "Clipboard Error - No such paste action found:",
-                  action
+                  action,
                 );
               }
 
@@ -10904,7 +10907,7 @@
               if (!this.pasteParser) {
                 console.warn(
                   "Clipboard Error - No such paste parser found:",
-                  parser
+                  parser,
                 );
               }
 
@@ -10950,7 +10953,7 @@
           if (Array.isArray(data)) {
             data.forEach(function (row) {
               output.push(
-                _this3.table.modules.mutator.transformRow(row, "clipboard")
+                _this3.table.modules.mutator.transformRow(row, "clipboard"),
               );
             });
           } else {
@@ -11014,7 +11017,7 @@
             return target._row.table.componentFunctionBinder.handle(
               "row",
               target._row,
-              name
+              name,
             );
           }
         },
@@ -11227,11 +11230,11 @@
             {
               field: "value",
             },
-            this
+            this,
           );
           this.subscribe(
             "cell-value-changed",
-            this.cellValueChanged.bind(this)
+            this.cellValueChanged.bind(this),
           );
           this.subscribe("column-init", this.initializeColumnCheck.bind(this));
           this.subscribe("row-deleted", this.rowsUpdated.bind(this));
@@ -11244,7 +11247,7 @@
           this.subscribe("rows-visible", this.visibleRows.bind(this));
           this.registerTableFunction(
             "getCalcResults",
-            this.getResults.bind(this)
+            this.getResults.bind(this),
           );
           this.registerTableFunction("recalc", this.userRecalc.bind(this));
         },
@@ -11348,7 +11351,7 @@
                 } else {
                   console.warn(
                     "Column Calc Error - No such calculation found, ignoring: ",
-                    def.topCalc
+                    def.topCalc,
                   );
                 }
 
@@ -11377,7 +11380,7 @@
                 } else {
                   console.warn(
                     "Column Calc Error - No such calculation found, ignoring: ",
-                    def.bottomCalc
+                    def.bottomCalc,
                   );
                 }
 
@@ -11433,7 +11436,7 @@
               .getElement()
               .insertBefore(
                 this.topElement,
-                this.table.columnManager.headersElement.nextSibling
+                this.table.columnManager.headersElement.nextSibling,
               );
             this.topInitialized = true;
           }
@@ -11583,7 +11586,7 @@
             ) {
               if (row.modules.dataTree.open) {
                 var children = _this3.rowsToData(
-                  _this3.table.modules.dataTree.getFilteredTreeChildren(row)
+                  _this3.table.modules.dataTree.getFilteredTreeChildren(row),
                 );
 
                 data = data.concat(children);
@@ -11627,45 +11630,47 @@
           row.generateCells = function () {
             var cells = [];
 
-            _this4.table.columnManager.columnsByIndex.forEach(function (
-              column
-            ) {
-              //set field name of mock column
-              _this4.genColumn.setField(column.getField());
+            _this4.table.columnManager.columnsByIndex.forEach(
+              function (column) {
+                //set field name of mock column
+                _this4.genColumn.setField(column.getField());
 
-              _this4.genColumn.hozAlign = column.hozAlign;
+                _this4.genColumn.hozAlign = column.hozAlign;
 
-              if (
-                column.definition[pos + "CalcFormatter"] &&
-                _this4.table.modExists("format")
-              ) {
-                _this4.genColumn.modules.format = {
-                  formatter: _this4.table.modules.format.getFormatter(
-                    column.definition[pos + "CalcFormatter"]
-                  ),
-                  params: column.definition[pos + "CalcFormatterParams"] || {},
-                };
-              } else {
-                _this4.genColumn.modules.format = {
-                  formatter:
-                    _this4.table.modules.format.getFormatter("plaintext"),
-                  params: {},
-                };
-              } //ensure css class defintion is replicated to calculation cell
+                if (
+                  column.definition[pos + "CalcFormatter"] &&
+                  _this4.table.modExists("format")
+                ) {
+                  _this4.genColumn.modules.format = {
+                    formatter: _this4.table.modules.format.getFormatter(
+                      column.definition[pos + "CalcFormatter"],
+                    ),
+                    params:
+                      column.definition[pos + "CalcFormatterParams"] || {},
+                  };
+                } else {
+                  _this4.genColumn.modules.format = {
+                    formatter:
+                      _this4.table.modules.format.getFormatter("plaintext"),
+                    params: {},
+                  };
+                } //ensure css class defintion is replicated to calculation cell
 
-              _this4.genColumn.definition.cssClass = column.definition.cssClass; //generate cell and assign to correct column
+                _this4.genColumn.definition.cssClass =
+                  column.definition.cssClass; //generate cell and assign to correct column
 
-              var cell = new Cell(_this4.genColumn, row);
-              cell.getElement();
-              cell.column = column;
-              cell.setWidth();
-              column.cells.push(cell);
-              cells.push(cell);
+                var cell = new Cell(_this4.genColumn, row);
+                cell.getElement();
+                cell.column = column;
+                cell.setWidth();
+                column.cells.push(cell);
+                cells.push(cell);
 
-              if (!column.visible) {
-                cell.hide();
-              }
-            });
+                if (!column.visible) {
+                  cell.hide();
+                }
+              },
+            );
 
             row.cells = cells;
           };
@@ -11698,7 +11703,7 @@
                   : column.modules.columnCalcs[paramKey];
               column.setFieldValue(
                 rowData,
-                column.modules.columnCalcs[type](values, data, params)
+                column.modules.columnCalcs[type](values, data, params),
               );
             }
           });
@@ -11835,43 +11840,43 @@
       _this.registerComponentFunction(
         "row",
         "treeCollapse",
-        _this.collapseRow.bind(_assertThisInitialized(_this))
+        _this.collapseRow.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "row",
         "treeExpand",
-        _this.expandRow.bind(_assertThisInitialized(_this))
+        _this.expandRow.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "row",
         "treeToggle",
-        _this.toggleRow.bind(_assertThisInitialized(_this))
+        _this.toggleRow.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "row",
         "getTreeParent",
-        _this.getTreeParent.bind(_assertThisInitialized(_this))
+        _this.getTreeParent.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "row",
         "getTreeChildren",
-        _this.getRowChildren.bind(_assertThisInitialized(_this))
+        _this.getRowChildren.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "row",
         "addTreeChild",
-        _this.addTreeChildRow.bind(_assertThisInitialized(_this))
+        _this.addTreeChildRow.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "row",
         "isTreeExpanded",
-        _this.isRowExpanded.bind(_assertThisInitialized(_this))
+        _this.isRowExpanded.bind(_assertThisInitialized(_this)),
       );
 
       return _this;
@@ -11960,17 +11965,17 @@
             this.subscribe(
               "row-data-changed",
               this.rowDataChanged.bind(this),
-              10
+              10,
             );
             this.subscribe(
               "cell-value-updated",
-              this.cellValueChanged.bind(this)
+              this.cellValueChanged.bind(this),
             );
             this.subscribe("edit-cancelled", this.cellValueChanged.bind(this));
             this.subscribe("column-moving-rows", this.columnMoving.bind(this));
             this.subscribe(
               "table-built",
-              this.initializeElementField.bind(this)
+              this.initializeElementField.bind(this),
             );
             this.registerDisplayHandler(this.getRows.bind(this), 30);
           }
@@ -12043,7 +12048,7 @@
             row.modules.dataTree.branchEl
           ) {
             row.modules.dataTree.branchEl.parentNode.removeChild(
-              row.modules.dataTree.branchEl
+              row.modules.dataTree.branchEl,
             );
           }
 
@@ -12053,7 +12058,7 @@
             row.modules.dataTree.controlEl
           ) {
             row.modules.dataTree.controlEl.parentNode.removeChild(
-              row.modules.dataTree.controlEl
+              row.modules.dataTree.controlEl,
             );
           }
 
@@ -12142,7 +12147,7 @@
                   parseInt(
                     window
                       .getComputedStyle(el, null)
-                      .getPropertyValue("padding-right")
+                      .getPropertyValue("padding-right"),
                   ) +
                   config.index * this.indent +
                   "px";
@@ -12151,7 +12156,7 @@
                   parseInt(
                     window
                       .getComputedStyle(el, null)
-                      .getPropertyValue("padding-left")
+                      .getPropertyValue("padding-left"),
                   ) +
                   config.index * this.indent +
                   "px";
@@ -12301,7 +12306,7 @@
             if (childRow.modules.dataTree.children) {
               childRow.modules.dataTree.open = _this6.startOpen(
                 childRow.getComponent(),
-                childRow.modules.dataTree.index
+                childRow.modules.dataTree.index,
               );
             }
 
@@ -12322,7 +12327,7 @@
             this.dispatchExternal(
               "dataTreeRowExpanded",
               row.getComponent(),
-              row.modules.dataTree.index
+              row.modules.dataTree.index,
             );
           }
         },
@@ -12339,7 +12344,7 @@
             this.dispatchExternal(
               "dataTreeRowCollapsed",
               row.getComponent(),
-              row.modules.dataTree.index
+              row.modules.dataTree.index,
             );
           }
         },
@@ -12440,7 +12445,7 @@
             row.data[this.field] = [];
             row.modules.dataTree.open = this.startOpen(
               row.getComponent(),
-              row.modules.dataTree.index
+              row.modules.dataTree.index,
             );
           }
 
@@ -12451,7 +12456,7 @@
               row.data[this.field].splice(
                 top ? childIndex : childIndex + 1,
                 0,
-                data
+                data,
               );
             }
           }
@@ -12488,13 +12493,13 @@
               subject instanceof HTMLElement
             ) {
               if (parent.modules.dataTree) {
-                match = parent.modules.dataTree.children.find(function (
-                  childRow
-                ) {
-                  return childRow instanceof Row
-                    ? childRow.element === subject
-                    : false;
-                });
+                match = parent.modules.dataTree.children.find(
+                  function (childRow) {
+                    return childRow instanceof Row
+                      ? childRow.element === subject
+                      : false;
+                  },
+                );
 
                 if (match) {
                   match = match.data;
@@ -12542,7 +12547,7 @@
 
                 if (recurse) {
                   output = output.concat(
-                    _this8.getTreeChildren(childRow, component, recurse)
+                    _this8.getTreeChildren(childRow, component, recurse),
                   );
                 }
               }
@@ -12587,13 +12592,13 @@
       switch (row.type) {
         case "group":
           console.warn(
-            "Download Warning - CSV downloader cannot process row groups"
+            "Download Warning - CSV downloader cannot process row groups",
           );
           break;
 
         case "calc":
           console.warn(
-            "Download Warning - CSV downloader cannot process column calculations"
+            "Download Warning - CSV downloader cannot process column calculations",
           );
           break;
 
@@ -12654,13 +12659,13 @@
 
         case "group":
           console.warn(
-            "Download Warning - JSON downloader cannot process row groups"
+            "Download Warning - JSON downloader cannot process row groups",
           );
           break;
 
         case "calc":
           console.warn(
-            "Download Warning - JSON downloader cannot process column calculations"
+            "Download Warning - JSON downloader cannot process column calculations",
           );
           break;
 
@@ -12822,7 +12827,7 @@
             rowData.push(
               !(col.value instanceof Date) && _typeof(col.value) === "object"
                 ? JSON.stringify(col.value)
-                : col.value
+                : col.value,
             );
 
             if (col.width > 1 || col.height > -1) {
@@ -12881,7 +12886,7 @@
               intercept: function intercept(data) {
                 workbook.Sheets[sheet] = data;
               },
-            }
+            },
           );
         }
       }
@@ -12917,7 +12922,7 @@
     if (this.modExists("export", true)) {
       setFileContents(
         this.modules["export"].genereateHTMLTable(list),
-        "text/html"
+        "text/html",
       );
     }
   }
@@ -12933,13 +12938,13 @@
 
         case "group":
           console.warn(
-            "Download Warning - JSON downloader cannot process row groups"
+            "Download Warning - JSON downloader cannot process row groups",
           );
           break;
 
         case "calc":
           console.warn(
-            "Download Warning - JSON downloader cannot process column calculations"
+            "Download Warning - JSON downloader cannot process column calculations",
           );
           break;
 
@@ -13001,7 +13006,7 @@
           this.registerTableFunction("download", this.download.bind(this));
           this.registerTableFunction(
             "downloadToTab",
-            this.downloadToTab.bind(this)
+            this.downloadToTab.bind(this),
           );
         }, ///////////////////////////////////
         ///////// Table Functions /////////
@@ -13023,7 +13028,7 @@
           filename,
           options,
           range,
-          interceptCallback
+          interceptCallback,
         ) {
           var downloadFunc = false;
 
@@ -13047,7 +13052,7 @@
             } else {
               console.warn(
                 "Download Error - No such download type found: ",
-                type
+                type,
               );
             }
           }
@@ -13058,7 +13063,7 @@
               this.table,
               list,
               options || {},
-              buildLink.bind(this)
+              buildLink.bind(this),
             );
           }
         },
@@ -13070,7 +13075,7 @@
             this.table.options.downloadConfig,
             false,
             range || this.table.options.downloadRowRange,
-            "download"
+            "download",
           ); //assign group header formatter
 
           var groupHeader = this.table.options.groupHeaderDownload;
@@ -13090,7 +13095,7 @@
                   group.value,
                   row.component._group.getRowCount(),
                   row.component._group.getData(),
-                  row.component
+                  row.component,
                 );
               }
             }
@@ -13143,7 +13148,7 @@
                 "",
                 data.options,
                 data.active,
-                data.intercept
+                data.intercept,
               );
               break;
           }
@@ -13266,7 +13271,7 @@
           key = key.slice(1);
           input.setAttribute(
             key,
-            input.getAttribute(key) + editorParams.elementAttributes["+" + key]
+            input.getAttribute(key) + editorParams.elementAttributes["+" + key],
           );
         } else {
           input.setAttribute(key, editorParams.elementAttributes[key]);
@@ -13328,7 +13333,7 @@
     var cellValue = cell.getValue(),
       vertNav = editorParams.verticalNavigation || "hybrid",
       value = String(
-        cellValue !== null && typeof cellValue !== "undefined" ? cellValue : ""
+        cellValue !== null && typeof cellValue !== "undefined" ? cellValue : "",
       ),
       count = (value.match(/(?:\r\n|\r|\n)/g) || []).length + 1,
       input = document.createElement("textarea"),
@@ -13351,7 +13356,7 @@
           key = key.slice(1);
           input.setAttribute(
             key,
-            input.getAttribute(key) + editorParams.elementAttributes["+" + key]
+            input.getAttribute(key) + editorParams.elementAttributes["+" + key],
           );
         } else {
           input.setAttribute(key, editorParams.elementAttributes[key]);
@@ -13475,7 +13480,7 @@
           key = key.slice(1);
           input.setAttribute(
             key,
-            input.getAttribute(key) + editorParams.elementAttributes["+" + key]
+            input.getAttribute(key) + editorParams.elementAttributes["+" + key],
           );
         } else {
           input.setAttribute(key, editorParams.elementAttributes[key]);
@@ -13583,7 +13588,7 @@
           key = key.slice(1);
           input.setAttribute(
             key,
-            input.getAttribute(key) + editorParams.elementAttributes["+" + key]
+            input.getAttribute(key) + editorParams.elementAttributes["+" + key],
           );
         } else {
           input.setAttribute(key, editorParams.elementAttributes[key]);
@@ -13668,7 +13673,7 @@
         !editorParams.values)
     ) {
       console.warn(
-        "DEPRECATION WARNING - values for the select editor must now be passed into the values property of the editorParams object, not as the editorParams object"
+        "DEPRECATION WARNING - values for the select editor must now be passed into the values property of the editorParams object, not as the editorParams object",
       );
       editorParams = {
         values: editorParams,
@@ -13697,7 +13702,7 @@
       } else {
         console.warn(
           "unable to find matching column to create select lookup list:",
-          field
+          field,
         );
       }
 
@@ -13823,7 +13828,7 @@
                 item.label,
                 cell,
                 el,
-                item.itemParams
+                item.itemParams,
               )
             : item.label;
 
@@ -13866,7 +13871,7 @@
                 key = key.slice(1);
                 el.setAttribute(
                   key,
-                  input.getAttribute(key) + item.elementAttributes["+" + key]
+                  input.getAttribute(key) + item.elementAttributes["+" + key],
                 );
               } else {
                 el.setAttribute(key, item.elementAttributes[key]);
@@ -14028,7 +14033,7 @@
         } else if (typeof editorParams.values === "string") {
           parseItems(
             getUniqueColumnValues(editorParams.values),
-            initialDisplayValue
+            initialDisplayValue,
           );
         } else {
           parseItems(editorParams.values || [], initialDisplayValue);
@@ -14096,7 +14101,7 @@
           key = key.slice(1);
           input.setAttribute(
             key,
-            input.getAttribute(key) + editorParams.elementAttributes["+" + key]
+            input.getAttribute(key) + editorParams.elementAttributes["+" + key],
           );
         } else {
           input.setAttribute(key, editorParams.elementAttributes[key]);
@@ -14267,7 +14272,7 @@
           key = key.slice(1);
           input.setAttribute(
             key,
-            input.getAttribute(key) + editorParams.elementAttributes["+" + key]
+            input.getAttribute(key) + editorParams.elementAttributes["+" + key],
           );
         } else {
           input.setAttribute(key, editorParams.elementAttributes[key]);
@@ -14323,7 +14328,7 @@
       } else {
         console.warn(
           "unable to find matching column to create autocomplete lookup list:",
-          field
+          field,
         );
       }
 
@@ -14349,7 +14354,7 @@
           addNotice(
             typeof editorParams.searchingPlaceholder !== "undefined"
               ? editorParams.searchingPlaceholder
-              : "Searching..."
+              : "Searching...",
           );
           matches
             .then(function (result) {
@@ -14729,7 +14734,7 @@
           } else {
             star.classList.replace(
               "tabulator-star-inactive",
-              "tabulator-star-active"
+              "tabulator-star-active",
             );
           }
 
@@ -14741,7 +14746,7 @@
           } else {
             star.classList.replace(
               "tabulator-star-active",
-              "tabulator-star-inactive"
+              "tabulator-star-inactive",
             );
           }
 
@@ -14803,7 +14808,7 @@
           starsHolder.setAttribute(
             key,
             starsHolder.getAttribute(key) +
-              editorParams.elementAttributes["+" + key]
+              editorParams.elementAttributes["+" + key],
           );
         } else {
           starsHolder.setAttribute(key, editorParams.elementAttributes[key]);
@@ -14885,7 +14890,7 @@
               ((element.clientWidth -
                 parseInt(style.getPropertyValue("padding-left")) -
                 parseInt(style.getPropertyValue("padding-right"))) /
-                100)
+                100),
           ) +
         min;
       success(calcVal);
@@ -14920,7 +14925,7 @@
           key = key.slice(1);
           bar.setAttribute(
             key,
-            bar.getAttribute(key) + editorParams.elementAttributes["+" + key]
+            bar.getAttribute(key) + editorParams.elementAttributes["+" + key],
           );
         } else {
           bar.setAttribute(key, editorParams.elementAttributes[key]);
@@ -15017,7 +15022,7 @@
           key = key.slice(1);
           input.setAttribute(
             key,
-            input.getAttribute(key) + editorParams.elementAttributes["+" + key]
+            input.getAttribute(key) + editorParams.elementAttributes["+" + key],
           );
         } else {
           input.setAttribute(key, editorParams.elementAttributes[key]);
@@ -15140,102 +15145,102 @@
 
       _this.registerTableFunction(
         "getEditedCells",
-        _this.getEditedCells.bind(_assertThisInitialized(_this))
+        _this.getEditedCells.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "clearCellEdited",
-        _this.clearCellEdited.bind(_assertThisInitialized(_this))
+        _this.clearCellEdited.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "navigatePrev",
-        _this.navigatePrev.bind(_assertThisInitialized(_this))
+        _this.navigatePrev.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "navigateNext",
-        _this.navigateNext.bind(_assertThisInitialized(_this))
+        _this.navigateNext.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "navigateLeft",
-        _this.navigateLeft.bind(_assertThisInitialized(_this))
+        _this.navigateLeft.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "navigateRight",
-        _this.navigateRight.bind(_assertThisInitialized(_this))
+        _this.navigateRight.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "navigateUp",
-        _this.navigateUp.bind(_assertThisInitialized(_this))
+        _this.navigateUp.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "navigateDown",
-        _this.navigateDown.bind(_assertThisInitialized(_this))
+        _this.navigateDown.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "cell",
         "isEdited",
-        _this.cellisEdited.bind(_assertThisInitialized(_this))
+        _this.cellisEdited.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "cell",
         "clearEdited",
-        _this.clearEdited.bind(_assertThisInitialized(_this))
+        _this.clearEdited.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "cell",
         "edit",
-        _this.editCell.bind(_assertThisInitialized(_this))
+        _this.editCell.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "cell",
         "cancelEdit",
-        _this.cellCancelEdit.bind(_assertThisInitialized(_this))
+        _this.cellCancelEdit.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "cell",
         "navigatePrev",
-        _this.navigatePrev.bind(_assertThisInitialized(_this))
+        _this.navigatePrev.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "cell",
         "navigateNext",
-        _this.navigateNext.bind(_assertThisInitialized(_this))
+        _this.navigateNext.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "cell",
         "navigateLeft",
-        _this.navigateLeft.bind(_assertThisInitialized(_this))
+        _this.navigateLeft.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "cell",
         "navigateRight",
-        _this.navigateRight.bind(_assertThisInitialized(_this))
+        _this.navigateRight.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "cell",
         "navigateUp",
-        _this.navigateUp.bind(_assertThisInitialized(_this))
+        _this.navigateUp.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "cell",
         "navigateDown",
-        _this.navigateDown.bind(_assertThisInitialized(_this))
+        _this.navigateDown.bind(_assertThisInitialized(_this)),
       );
 
       return _this;
@@ -15249,34 +15254,34 @@
           this.subscribe("cell-delete", this.clearEdited.bind(this));
           this.subscribe(
             "column-layout",
-            this.initializeColumnCheck.bind(this)
+            this.initializeColumnCheck.bind(this),
           );
           this.subscribe("column-delete", this.columnDeleteCheck.bind(this));
           this.subscribe("row-deleting", this.rowDeleteCheck.bind(this));
           this.subscribe("data-refeshing", this.cancelEdit.bind(this));
           this.subscribe(
             "keybinding-nav-prev",
-            this.navigatePrev.bind(this, undefined)
+            this.navigatePrev.bind(this, undefined),
           );
           this.subscribe(
             "keybinding-nav-next",
-            this.keybindingNavigateNext.bind(this)
+            this.keybindingNavigateNext.bind(this),
           );
           this.subscribe(
             "keybinding-nav-left",
-            this.navigateLeft.bind(this, undefined)
+            this.navigateLeft.bind(this, undefined),
           );
           this.subscribe(
             "keybinding-nav-right",
-            this.navigateRight.bind(this, undefined)
+            this.navigateRight.bind(this, undefined),
           );
           this.subscribe(
             "keybinding-nav-up",
-            this.navigateUp.bind(this, undefined)
+            this.navigateUp.bind(this, undefined),
           );
           this.subscribe(
             "keybinding-nav-down",
-            this.navigateDown.bind(this, undefined)
+            this.navigateDown.bind(this, undefined),
           );
         }, ///////////////////////////////////
         ////// Keybinding Functions ///////
@@ -15327,7 +15332,7 @@
             this.table.modules.edit.cancelEdit();
           } else {
             console.warn(
-              "Cancel Editor Error - This cell is not currently being edited "
+              "Cancel Editor Error - This cell is not currently being edited ",
             );
           }
         }, ///////////////////////////////////
@@ -15377,7 +15382,7 @@
               if (prevRow) {
                 nextCell = this.findNextEditableCell(
                   prevRow,
-                  prevRow.cells.length
+                  prevRow.cells.length,
                 );
 
                 if (nextCell) {
@@ -15552,7 +15557,7 @@
 
                 if (typeof cell.column.modules.edit.check == "function") {
                   allowEdit = cell.column.modules.edit.check(
-                    cell.getComponent()
+                    cell.getComponent(),
                   );
                 }
 
@@ -15583,7 +15588,7 @@
               ) {
                 if (typeof cell.column.modules.edit.check == "function") {
                   allowEdit = cell.column.modules.edit.check(
-                    cell.getComponent()
+                    cell.getComponent(),
                   );
                 }
 
@@ -15641,7 +15646,7 @@
               } else {
                 console.warn(
                   "Editor Error - No such editor found: ",
-                  column.definition.editor
+                  column.definition.editor,
                 );
               }
 
@@ -15662,7 +15667,7 @@
                 } else {
                   console.warn(
                     "Editor Error - Cannot auto lookup editor for a custom formatter: ",
-                    column.definition.formatter
+                    column.definition.formatter,
                   );
                 }
               }
@@ -15733,7 +15738,7 @@
             if (cell.column.definition.cellEditCancelled) {
               cell.column.definition.cellEditCancelled.call(
                 this.table,
-                component
+                component,
               );
             }
 
@@ -15823,16 +15828,16 @@
             if (this.table.modExists("frozenColumns")) {
               leftEdge += parseInt(this.table.modules.frozenColumns.leftMargin);
               rightEdge -= parseInt(
-                this.table.modules.frozenColumns.rightMargin
+                this.table.modules.frozenColumns.rightMargin,
               );
             }
 
             if (this.table.options.renderHorizontal === "virtual") {
               leftEdge -= parseInt(
-                this.table.columnManager.renderer.vDomPadLeft
+                this.table.columnManager.renderer.vDomPadLeft,
               );
               rightEdge -= parseInt(
-                this.table.columnManager.renderer.vDomPadLeft
+                this.table.columnManager.renderer.vDomPadLeft,
               );
             }
 
@@ -15879,7 +15884,7 @@
                 valid = self.table.modules.validate.validate(
                   cell.column.modules.validate,
                   cell,
-                  value
+                  value,
                 );
               }
 
@@ -15907,7 +15912,7 @@
                     "validationFailed",
                     cell.getComponent(),
                     value,
-                    valid
+                    valid,
                   );
                   return false;
                 }
@@ -15922,7 +15927,7 @@
                   "validationFailed",
                   cell.getComponent(),
                   value,
-                  valid
+                  valid,
                 );
                 return false;
               }
@@ -15967,7 +15972,7 @@
                   cell.column.definition.cellClick.call(
                     this.table,
                     e,
-                    component
+                    component,
                   );
                 }
               }
@@ -15987,7 +15992,7 @@
                 onRendered,
                 success,
                 cancel,
-                params
+                params,
               ); //if editor returned, add to DOM, if false, abort edit
 
               if (cellEditor !== false) {
@@ -16013,7 +16018,7 @@
                 } else {
                   console.warn(
                     "Edit Error - Editor should return an instance of Node, the editor returned:",
-                    cellEditor
+                    cellEditor,
                   );
                   element.blur();
                   return false;
@@ -16089,7 +16094,7 @@
     component,
     width,
     height,
-    depth
+    depth,
   ) {
     _classCallCheck(this, ExportColumn);
 
@@ -16191,7 +16196,7 @@
               default:
                 if (this.table.options.pagination) {
                   rows = this.table.rowManager.getDisplayRows(
-                    this.table.rowManager.displayRows.length - 2
+                    this.table.rowManager.displayRows.length - 2,
                   );
                 } else {
                   rows = this.table.rowManager.getDisplayRows();
@@ -16340,8 +16345,8 @@
                     col.column.getComponent(),
                     col.width,
                     col.height,
-                    col.depth
-                  )
+                    col.depth,
+                  ),
                 );
               } else {
                 columns.push(null);
@@ -16409,8 +16414,8 @@
                     row.key,
                     row.getComponent(),
                     columns.length,
-                    1
-                  )
+                    1,
+                  ),
                 );
                 break;
 
@@ -16422,8 +16427,8 @@
                       col._column.getFieldValue(rowData),
                       col,
                       1,
-                      1
-                    )
+                      1,
+                    ),
                   );
                 });
 
@@ -16438,7 +16443,7 @@
             }
 
             exportRows.push(
-              new ExportRow(row.type, exportCols, row.getComponent(), indent)
+              new ExportRow(row.type, exportCols, row.getComponent(), indent),
             );
           });
           return exportRows;
@@ -16498,12 +16503,12 @@
               "font-weight",
               "font-family",
               "font-size",
-            ]
+            ],
           );
 
           if (list.length > 1000) {
             console.warn(
-              "It may take a long time to render an HTML table with more than 1000 rows"
+              "It may take a long time to render an HTML table with more than 1000 rows",
             );
           }
 
@@ -16511,19 +16516,19 @@
             switch (row.type) {
               case "header":
                 headerEl.appendChild(
-                  _this6.genereateHeaderElement(row, setup, styles)
+                  _this6.genereateHeaderElement(row, setup, styles),
                 );
                 break;
 
               case "group":
                 bodyEl.appendChild(
-                  _this6.genereateGroupElement(row, setup, styles)
+                  _this6.genereateGroupElement(row, setup, styles),
                 );
                 break;
 
               case "calc":
                 bodyEl.appendChild(
-                  _this6.genereateCalcElement(row, setup, styles)
+                  _this6.genereateCalcElement(row, setup, styles),
                 );
                 break;
 
@@ -16543,7 +16548,7 @@
                     "font-family",
                     "font-size",
                     "background-color",
-                  ]
+                  ],
                 );
 
                 bodyEl.appendChild(rowEl);
@@ -16572,16 +16577,16 @@
 
           if (this.cloneTableStyle && window.getComputedStyle) {
             styles.oddRow = this.table.element.querySelector(
-              ".tabulator-row-odd:not(.tabulator-group):not(.tabulator-calcs)"
+              ".tabulator-row-odd:not(.tabulator-group):not(.tabulator-calcs)",
             );
             styles.evenRow = this.table.element.querySelector(
-              ".tabulator-row-even:not(.tabulator-group):not(.tabulator-calcs)"
+              ".tabulator-row-even:not(.tabulator-group):not(.tabulator-calcs)",
             );
             styles.calcRow = this.table.element.querySelector(
-              ".tabulator-row.tabulator-calcs"
+              ".tabulator-row.tabulator-calcs",
             );
             styles.firstRow = this.table.element.querySelector(
-              ".tabulator-row:not(.tabulator-group):not(.tabulator-calcs)"
+              ".tabulator-row:not(.tabulator-group):not(.tabulator-calcs)",
             );
             styles.firstGroup =
               this.table.element.getElementsByClassName("tabulator-group")[0];
@@ -16642,7 +16647,7 @@
                   "padding-left",
                   "padding-right",
                   "padding-bottom",
-                ]
+                ],
               );
 
               if (column.component._column.visible) {
@@ -16660,7 +16665,7 @@
                 _this7.mapElementStyles(
                   column.component._column.parent.groupElement,
                   cellEl,
-                  ["border-top"]
+                  ["border-top"],
                 );
               }
 
@@ -16683,7 +16688,7 @@
               group.value,
               row.component._group.getRowCount(),
               row.component._group.getData(),
-              row.component
+              row.component,
             );
           } else {
             if (setup.groupHeader === false) {
@@ -16693,7 +16698,7 @@
                 group.value,
                 row.component._group.getRowCount(),
                 row.component._group.getData(),
-                row.component
+                row.component,
               );
             }
           }
@@ -16797,7 +16802,7 @@
               ) {
                 value = _this8.table.modules.format.formatExportValue(
                   cellWrapper,
-                  _this8.colVisProp
+                  _this8.colVisProp,
                 );
               } else {
                 switch (_typeof(value)) {
@@ -16854,18 +16859,18 @@
                   if (row.component._row.modules.dataTree.controlEl) {
                     cellEl.insertBefore(
                       row.component._row.modules.dataTree.controlEl.cloneNode(
-                        true
+                        true,
                       ),
-                      cellEl.firstChild
+                      cellEl.firstChild,
                     );
                   }
 
                   if (row.component._row.modules.dataTree.branchEl) {
                     cellEl.insertBefore(
                       row.component._row.modules.dataTree.branchEl.cloneNode(
-                        true
+                        true,
                       ),
-                      cellEl.firstChild
+                      cellEl.firstChild,
                     );
                   }
                 }
@@ -16903,7 +16908,7 @@
             config || this.table.options.htmlOutputConfig,
             style,
             visible,
-            colVisProp || "htmlOutput"
+            colVisProp || "htmlOutput",
           );
           return this.genereateHTMLTable(list);
         },
@@ -16999,10 +17004,10 @@
           .split(
             typeof filterParams.separator === "undefined"
               ? " "
-              : filterParams.separator
+              : filterParams.separator,
           ),
         value = String(
-          rowVal === null || typeof rowVal === "undefined" ? "" : rowVal
+          rowVal === null || typeof rowVal === "undefined" ? "" : rowVal,
         ).toLowerCase(),
         matches = [];
       keywords.forEach(function (keyword) {
@@ -17098,91 +17103,91 @@
 
       _this.registerTableFunction(
         "searchRows",
-        _this.searchRows.bind(_assertThisInitialized(_this))
+        _this.searchRows.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "searchData",
-        _this.searchData.bind(_assertThisInitialized(_this))
+        _this.searchData.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "setFilter",
-        _this.userSetFilter.bind(_assertThisInitialized(_this))
+        _this.userSetFilter.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "refreshFilter",
-        _this.userRefreshFilter.bind(_assertThisInitialized(_this))
+        _this.userRefreshFilter.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "addFilter",
-        _this.userAddFilter.bind(_assertThisInitialized(_this))
+        _this.userAddFilter.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "getFilters",
-        _this.getFilters.bind(_assertThisInitialized(_this))
+        _this.getFilters.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "setHeaderFilterFocus",
-        _this.userSetHeaderFilterFocus.bind(_assertThisInitialized(_this))
+        _this.userSetHeaderFilterFocus.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "getHeaderFilterValue",
-        _this.userGetHeaderFilterValue.bind(_assertThisInitialized(_this))
+        _this.userGetHeaderFilterValue.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "setHeaderFilterValue",
-        _this.userSetHeaderFilterValue.bind(_assertThisInitialized(_this))
+        _this.userSetHeaderFilterValue.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "getHeaderFilters",
-        _this.getHeaderFilters.bind(_assertThisInitialized(_this))
+        _this.getHeaderFilters.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "removeFilter",
-        _this.userRemoveFilter.bind(_assertThisInitialized(_this))
+        _this.userRemoveFilter.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "clearFilter",
-        _this.userClearFilter.bind(_assertThisInitialized(_this))
+        _this.userClearFilter.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "clearHeaderFilter",
-        _this.userClearHeaderFilter.bind(_assertThisInitialized(_this))
+        _this.userClearHeaderFilter.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "column",
         "headerFilterFocus",
-        _this.setHeaderFilterFocus.bind(_assertThisInitialized(_this))
+        _this.setHeaderFilterFocus.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "column",
         "reloadHeaderFilter",
-        _this.reloadHeaderFilter.bind(_assertThisInitialized(_this))
+        _this.reloadHeaderFilter.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "column",
         "getHeaderFilterValue",
-        _this.getHeaderFilterValue.bind(_assertThisInitialized(_this))
+        _this.getHeaderFilterValue.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "column",
         "setHeaderFilterValue",
-        _this.setHeaderFilterValue.bind(_assertThisInitialized(_this))
+        _this.setHeaderFilterValue.bind(_assertThisInitialized(_this)),
       );
 
       return _this;
@@ -17194,15 +17199,15 @@
         value: function initialize() {
           this.subscribe(
             "column-init",
-            this.initializeColumnHeaderFilter.bind(this)
+            this.initializeColumnHeaderFilter.bind(this),
           );
           this.subscribe(
             "column-width-fit-before",
-            this.hideHeaderFilterElements.bind(this)
+            this.hideHeaderFilterElements.bind(this),
           );
           this.subscribe(
             "column-width-fit-after",
-            this.showHeaderFilterElements.bind(this)
+            this.showHeaderFilterElements.bind(this),
           );
           this.subscribe("table-built", this.tableBuilt.bind(this));
 
@@ -17231,7 +17236,7 @@
               } else {
                 console.warn(
                   "Column Filter Error - No matching column found:",
-                  item.field
+                  item.field,
                 );
                 return false;
               }
@@ -17281,7 +17286,7 @@
           } else {
             console.warn(
               "Column Filter Focus Error - No matching column found:",
-              field
+              field,
             );
             return false;
           }
@@ -17297,7 +17302,7 @@
           } else {
             console.warn(
               "Column Filter Error - No matching column found:",
-              field
+              field,
             );
           }
         },
@@ -17312,7 +17317,7 @@
           } else {
             console.warn(
               "Column Filter Error - No matching column found:",
-              field
+              field,
             );
             return false;
           }
@@ -17365,7 +17370,7 @@
             ) {
               this.module("localize").setHeaderFilterColumnPlaceholder(
                 def.field,
-                def.headerFilterPlaceholder
+                def.headerFilterPlaceholder,
               );
             }
 
@@ -17420,7 +17425,7 @@
                     } else {
                       console.warn(
                         "Header Filter Error - Matching filter function not found: ",
-                        column.definition.headerFilterFunc
+                        column.definition.headerFilterFunc,
                       );
                     }
 
@@ -17439,7 +17444,7 @@
                         value,
                         fieldVal,
                         data,
-                        params
+                        params,
                       );
                     };
 
@@ -17512,7 +17517,7 @@
         value: function generateHeaderFilterElement(
           column,
           initialValue,
-          reinitialize
+          reinitialize,
         ) {
           var _this3 = this;
 
@@ -17534,7 +17539,7 @@
             column.modules.filter.headerElement.parentNode
           ) {
             column.contentElement.removeChild(
-              column.modules.filter.headerElement.parentNode
+              column.modules.filter.headerElement.parentNode,
             );
           }
 
@@ -17573,7 +17578,7 @@
                 } else {
                   console.warn(
                     "Filter Error - Cannot build header filter, No such editor found: ",
-                    column.definition.editor
+                    column.definition.editor,
                   );
                 }
 
@@ -17646,14 +17651,14 @@
                 function () {},
                 success,
                 cancel,
-                params
+                params,
               );
 
               if (!editorElement) {
                 console.warn(
                   "Filter Error - Cannot add filter to " +
                     field +
-                    " column, editor returned a value of false"
+                    " column, editor returned a value of false",
                 );
                 return;
               }
@@ -17663,7 +17668,7 @@
                   "Filter Error - Cannot add filter to " +
                     field +
                     " column, editor should return an instance of Node, the editor returned:",
-                  editorElement
+                  editorElement,
                 );
                 return;
               } //set Placeholder Text
@@ -17676,9 +17681,9 @@
                       "placeholder",
                       typeof value !== "undefined" && value
                         ? value
-                        : self.langText("headerFilters|default")
+                        : self.langText("headerFilters|default"),
                     );
-                  }
+                  },
                 );
               } else {
                 self.langBind("headerFilters|default", function (value) {
@@ -17714,7 +17719,7 @@
 
               column.modules.filter.headerElement = editorElement;
               column.modules.filter.attrType = editorElement.hasAttribute(
-                "type"
+                "type",
               )
                 ? editorElement.getAttribute("type").toLowerCase()
                 : "";
@@ -17769,7 +17774,7 @@
           } else {
             console.warn(
               "Filter Error - Cannot add header filter, column has no field set:",
-              column.definition.title
+              column.definition.title,
             );
           }
         }, //hide all header filter elements (used to ensure correct column widths in "fitData" layout mode)
@@ -17802,7 +17807,7 @@
           } else {
             console.warn(
               "Column Filter Focus Error - No header filter set on column:",
-              column.getField()
+              column.getField(),
             );
           }
         }, //programmatically get value of header filter
@@ -17815,7 +17820,7 @@
           } else {
             console.warn(
               "Column Filter Error - No header filter set on column:",
-              column.getField()
+              column.getField(),
             );
           }
         }, //programatically set value of header filter
@@ -17830,7 +17835,7 @@
             } else {
               console.warn(
                 "Column Filter Error - No header filter set on column:",
-                column.getField()
+                column.getField(),
               );
             }
           }
@@ -17844,12 +17849,12 @@
               this.generateHeaderFilterElement(
                 column,
                 column.modules.filter.value,
-                true
+                true,
               );
             } else {
               console.warn(
                 "Column Filter Error - No header filter set on column:",
-                column.getField()
+                column.getField(),
               );
             }
           }
@@ -17955,7 +17960,7 @@
                     filter.value,
                     column.getFieldValue(data),
                     data,
-                    filter.params || {}
+                    filter.params || {},
                   );
                 };
               } else {
@@ -17964,14 +17969,14 @@
                     filter.value,
                     data[filter.field],
                     data,
-                    filter.params || {}
+                    filter.params || {},
                   );
                 };
               }
             } else {
               console.warn(
                 "Filter Error - No such filter type found, ignoring: ",
-                filter.type
+                filter.type,
               );
             }
           }
@@ -18100,7 +18105,7 @@
             } else {
               console.warn(
                 "Filter Error - No matching filter type found, ignoring: ",
-                filter.type
+                filter.type,
               );
             }
           });
@@ -18173,7 +18178,9 @@
 
             if (match) {
               activeRows.push(
-                searchType === "data" ? row.getData("data") : row.getComponent()
+                searchType === "data"
+                  ? row.getData("data")
+                  : row.getComponent(),
               );
             }
           });
@@ -18212,7 +18219,7 @@
             this.dispatchExternal(
               "dataFiltered",
               this.getFilters(),
-              activeRowComponents
+              activeRowComponents,
             );
           }
 
@@ -18504,7 +18511,7 @@
       }
     } else {
       console.error(
-        "Format Error - 'datetime' formatter is dependant on luxon.js"
+        "Format Error - 'datetime' formatter is dependant on luxon.js",
       );
     }
   }
@@ -18559,7 +18566,7 @@
       }
     } else {
       console.error(
-        "Format Error - 'datetimediff' formatter is dependant on luxon.js"
+        "Format Error - 'datetimediff' formatter is dependant on luxon.js",
       );
     }
   }
@@ -18800,7 +18807,7 @@
 
   function color(cell, formatterParams, onRendered) {
     cell.getElement().style.backgroundColor = this.sanitizeHTML(
-      cell.getValue()
+      cell.getValue(),
     );
     return "";
   }
@@ -18974,14 +18981,14 @@
           if (typeof column.definition.formatterClipboard !== "undefined") {
             column.modules.format.clipboard = this.lookupFormatter(
               column,
-              "Clipboard"
+              "Clipboard",
             );
           }
 
           if (typeof column.definition.formatterHtmlOutput !== "undefined") {
             column.modules.format.htmlOutput = this.lookupFormatter(
               column,
-              "HtmlOutput"
+              "HtmlOutput",
             );
           }
         },
@@ -19001,7 +19008,7 @@
               } else {
                 console.warn(
                   "Formatter Error - No such formatter found: ",
-                  formatter
+                  formatter,
                 );
                 config.formatter = Format.formatters.plaintext;
               }
@@ -19083,7 +19090,7 @@
             this,
             component,
             params,
-            onRendered
+            onRendered,
           );
         },
       },
@@ -19111,7 +19118,7 @@
               this,
               cell.getComponent(),
               params,
-              onRendered
+              onRendered,
             );
           } else {
             return this.formatValue(cell);
@@ -19160,7 +19167,7 @@
               } else {
                 console.warn(
                   "Formatter Error - No such formatter found: ",
-                  formatter
+                  formatter,
                 );
                 formatter = Format.formatters.plaintext;
               }
@@ -19278,7 +19285,7 @@
         value: function frozenCheck(column) {
           if (column.parent.isGroup && column.definition.frozen) {
             console.warn(
-              "Frozen Column Error - Parent column group must be frozen, not individual columns or sub column groups"
+              "Frozen Column Error - Parent column group must be frozen, not individual columns or sub column groups",
             );
           }
 
@@ -19406,7 +19413,7 @@
 
               if (column.modules.frozen.edge) {
                 parentEl.classList.add(
-                  "tabulator-frozen-" + column.modules.frozen.position
+                  "tabulator-frozen-" + column.modules.frozen.position,
                 );
               }
             } else {
@@ -19434,7 +19441,7 @@
             if (column.parent.isGroup) {
               _this4.layoutElement(
                 _this4.getColGroupParentElement(column),
-                column
+                column,
               );
             } else {
               _this4.layoutElement(column.getElement(), column);
@@ -19510,7 +19517,7 @@
 
             if (column.modules.frozen.edge) {
               element.classList.add(
-                "tabulator-frozen-" + column.modules.frozen.position
+                "tabulator-frozen-" + column.modules.frozen.position,
               );
             }
           }
@@ -19554,19 +19561,19 @@
       _this.registerComponentFunction(
         "row",
         "freeze",
-        _this.freezeRow.bind(_assertThisInitialized(_this))
+        _this.freezeRow.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "row",
         "unfreeze",
-        _this.unfreezeRow.bind(_assertThisInitialized(_this))
+        _this.unfreezeRow.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "row",
         "isFrozen",
-        _this.isRowFrozen.bind(_assertThisInitialized(_this))
+        _this.isRowFrozen.bind(_assertThisInitialized(_this)),
       );
 
       return _this;
@@ -19583,7 +19590,7 @@
             .getElement()
             .insertBefore(
               this.topElement,
-              this.table.columnManager.headersElement.nextSibling
+              this.table.columnManager.headersElement.nextSibling,
             );
           this.subscribe("row-deleting", this.detachRow.bind(this));
           this.subscribe("rows-visible", this.visibleRows.bind(this));
@@ -19710,7 +19717,7 @@
             return target._group.table.componentFunctionBinder.handle(
               "row",
               target._group,
-              name
+              name,
             );
           }
         },
@@ -19803,7 +19810,7 @@
       key,
       field,
       generator,
-      oldGroup
+      oldGroup,
     ) {
       _classCallCheck(this, Group);
 
@@ -19934,7 +19941,7 @@
             this.groupManager.groupIDLookups[level].field,
             this.groupManager.headerGenerator[level] ||
               this.groupManager.headerGenerator[0],
-            this.old ? this.old.groups[groupKey] : false
+            this.old ? this.old.groups[groupKey] : false,
           );
           this.groups[groupKey] = group;
           this.groupList.push(group);
@@ -19947,7 +19954,7 @@
 
           if (this.hasSubGroups) {
             var groupID = this.groupManager.groupIDLookups[level].func(
-                row.getData()
+                row.getData(),
               ),
               groupKey = level + "_" + groupID;
 
@@ -20029,7 +20036,7 @@
             data[this.field] = this.key;
           } else {
             console.warn(
-              "Data Conforming Error - Cannot conform row data to match new group as groupBy is a function"
+              "Data Conforming Error - Cannot conform row data to match new group as groupBy is a function",
             );
           }
 
@@ -20128,7 +20135,7 @@
 
                 this.calcs.top =
                   this.groupManager.table.modules.columnCalcs.generateTopRow(
-                    this.rows
+                    this.rows,
                   );
                 output.push(this.calcs.top);
               }
@@ -20148,7 +20155,7 @@
 
                 this.calcs.bottom =
                   this.groupManager.table.modules.columnCalcs.generateBottomRow(
-                    this.rows
+                    this.rows,
                   );
                 output.push(this.calcs.bottom);
               }
@@ -20171,7 +20178,7 @@
                   if (this.groupManager.table.options.groupClosedShowCalcs) {
                     this.calcs.top =
                       this.groupManager.table.modules.columnCalcs.generateTopRow(
-                        this.rows
+                        this.rows,
                       );
                     output.push(this.calcs.top);
                   }
@@ -20189,7 +20196,7 @@
                   if (this.groupManager.table.options.groupClosedShowCalcs) {
                     this.calcs.bottom =
                       this.groupManager.table.modules.columnCalcs.generateBottomRow(
-                        this.rows
+                        this.rows,
                       );
                     output.push(this.calcs.bottom);
                   }
@@ -20270,7 +20277,7 @@
 
             this.groupManager.table.rowManager.setDisplayRows(
               this.groupManager.updateGroupRows(),
-              this.groupManager.getDisplayIndex()
+              this.groupManager.getDisplayIndex(),
             );
             this.groupManager.table.rowManager.checkClassicModeGroupHeaderWidth();
           } else {
@@ -20280,7 +20287,7 @@
           this.groupManager.table.externalEvents.dispatch(
             "groupVisibilityChanged",
             this.getComponent(),
-            false
+            false,
           );
         },
       },
@@ -20317,7 +20324,7 @@
 
             this.groupManager.table.rowManager.setDisplayRows(
               this.groupManager.updateGroupRows(),
-              this.groupManager.getDisplayIndex()
+              this.groupManager.getDisplayIndex(),
             );
             this.groupManager.table.rowManager.checkClassicModeGroupHeaderWidth();
           } else {
@@ -20327,7 +20334,7 @@
           this.groupManager.table.externalEvents.dispatch(
             "groupVisibilityChanged",
             this.getComponent(),
-            true
+            true,
           );
         },
       },
@@ -20344,7 +20351,7 @@
               this.key,
               this.getRowCount(),
               data,
-              this.getComponent()
+              this.getComponent(),
             );
           }
         },
@@ -20406,7 +20413,7 @@
             this.key,
             this.getRowCount(),
             data,
-            this.getComponent()
+            this.getComponent(),
           );
 
           while (this.element.firstChild) {
@@ -20459,7 +20466,7 @@
 
           for (var i = 0; i < this.element.childNodes.length; ++i) {
             this.element.childNodes[i].parentNode.removeChild(
-              this.element.childNodes[i]
+              this.element.childNodes[i],
             );
           }
 
@@ -20615,38 +20622,38 @@
 
       _this.registerTableFunction(
         "setGroupBy",
-        _this.setGroupBy.bind(_assertThisInitialized(_this))
+        _this.setGroupBy.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "setGroupValues",
-        _this.setGroupValues.bind(_assertThisInitialized(_this))
+        _this.setGroupValues.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "setGroupStartOpen",
-        _this.setGroupStartOpen.bind(_assertThisInitialized(_this))
+        _this.setGroupStartOpen.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "setGroupHeader",
-        _this.setGroupHeader.bind(_assertThisInitialized(_this))
+        _this.setGroupHeader.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "getGroups",
-        _this.userGetGroups.bind(_assertThisInitialized(_this))
+        _this.userGetGroups.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "getGroupedData",
-        _this.userGetGroupedData.bind(_assertThisInitialized(_this))
+        _this.userGetGroupedData.bind(_assertThisInitialized(_this)),
       ); //register component functions
 
       _this.registerComponentFunction(
         "row",
         "getGroup",
-        _this.rowGetGroup.bind(_assertThisInitialized(_this))
+        _this.rowGetGroup.bind(_assertThisInitialized(_this)),
       );
 
       return _this;
@@ -20662,7 +20669,7 @@
               this.subscribe(
                 "row-data-changed",
                 this.reassignRowToGroup.bind(this),
-                0
+                0,
               );
             }
 
@@ -20677,7 +20684,7 @@
             this.subscribe("rows-sample", this.rowSample.bind(this));
             this.subscribe(
               "render-virtual-fill",
-              this.virtualRenderFill.bind(this)
+              this.virtualRenderFill.bind(this),
             );
             this.registerDisplayHandler(this.displayHandler, 20);
             this.initialized = true;
@@ -20701,7 +20708,7 @@
               groupBy.length > groupHeader.length
             ) {
               console.warn(
-                "Error creating group headers, groupHeader array is shorter than groupBy array"
+                "Error creating group headers, groupHeader array is shorter than groupBy array",
               );
             }
 
@@ -20844,7 +20851,7 @@
                     row.modules.group.rows,
                     row,
                     index,
-                    !top
+                    !top,
                   );
                 }
               } else {
@@ -20854,7 +20861,7 @@
                     row.modules.group.rows,
                     row,
                     index,
-                    !top
+                    !top,
                   );
                 }
               }
@@ -20863,7 +20870,7 @@
                 row.modules.group.rows,
                 row,
                 index,
-                !top
+                !top,
               );
             }
           }
@@ -20914,7 +20921,7 @@
             this.trackChanges();
           } else {
             console.warn(
-              "Grouping Update - cant refresh view, no groups have been set"
+              "Grouping Update - cant refresh view, no groups have been set",
             );
           }
         },
@@ -20930,7 +20937,7 @@
             this.trackChanges();
           } else {
             console.warn(
-              "Grouping Update - cant refresh view, no groups have been set"
+              "Grouping Update - cant refresh view, no groups have been set",
             );
           }
         },
@@ -21054,7 +21061,7 @@
           group.groupList.forEach(function (child) {
             if (child.groupList.length) {
               groupComponents = groupComponents.concat(
-                _this3.getChildGroups(child)
+                _this3.getChildGroups(child),
               );
             } else {
               groupComponents.push(child);
@@ -21093,7 +21100,7 @@
                 group.key,
                 groupHeader.rowCount,
                 group.rows,
-                group
+                group,
               );
               groupListData.push(groupHeader);
               groupListData = groupListData.concat(childData);
@@ -21103,7 +21110,7 @@
                 group.key,
                 group.rows.length,
                 group.rows,
-                group
+                group,
               );
               groupHeader.rowCount = group.getRows().length;
               groupListData.push(groupHeader);
@@ -21177,7 +21184,7 @@
             groupID,
             this.groupIDLookups[0].field,
             this.headerGenerator[0],
-            oldGroups[groupKey]
+            oldGroups[groupKey],
           );
           this.groups[groupKey] = group;
           this.groupList.push(group);
@@ -21305,7 +21312,7 @@
       var newRow = this.table.rowManager.addRowActual(
         action.data.data,
         action.data.pos,
-        action.data.index
+        action.data.index,
       );
 
       if (this.table.options.groupBy && this.table.modExists("groupRows")) {
@@ -21318,7 +21325,7 @@
       this.table.rowManager.moveRowActual(
         action.component,
         this.table.rowManager.rows[action.data.posFrom],
-        !action.data.after
+        !action.data.after,
       );
       this.table.rowManager.redraw();
     },
@@ -21333,7 +21340,7 @@
       var newRow = this.table.rowManager.addRowActual(
         action.data.data,
         action.data.pos,
-        action.data.index
+        action.data.index,
       );
 
       if (this.table.options.groupBy && this.table.modExists("groupRows")) {
@@ -21349,7 +21356,7 @@
       this.table.rowManager.moveRowActual(
         action.component,
         this.table.rowManager.rows[action.data.posTo],
-        action.data.after
+        action.data.after,
       );
       this.table.rowManager.redraw();
     },
@@ -21382,7 +21389,7 @@
             this.subscribe("cell-value-updated", this.cellUpdated.bind(this));
             this.subscribe(
               "cell-delete",
-              this.clearComponentHistory.bind(this)
+              this.clearComponentHistory.bind(this),
             );
             this.subscribe("row-delete", this.rowDeleted.bind(this));
             this.subscribe("rows-wipe", this.clear.bind(this));
@@ -21394,11 +21401,11 @@
           this.registerTableFunction("redo", this.redo.bind(this));
           this.registerTableFunction(
             "getHistoryUndoSize",
-            this.getHistoryUndoSize.bind(this)
+            this.getHistoryUndoSize.bind(this),
           );
           this.registerTableFunction(
             "getHistoryRedoSize",
-            this.getHistoryRedoSize.bind(this)
+            this.getHistoryRedoSize.bind(this),
           );
           this.registerTableFunction("clearHistory", this.clear.bind(this));
         },
@@ -21520,7 +21527,7 @@
               "historyUndo",
               action.type,
               action.component.getComponent(),
-              action.data
+              action.data,
             );
             return true;
           } else {
@@ -21540,7 +21547,7 @@
               "historyRedo",
               action.type,
               action.component.getComponent(),
-              action.data
+              action.data,
             );
             return true;
           } else {
@@ -21745,7 +21752,7 @@
             this._extractOptions(
               header,
               col,
-              this.table.columnManager.optionsList.registeredDefaults
+              this.table.columnManager.optionsList.registeredDefaults,
             );
 
             this.fieldIndex[index] = col.field;
@@ -22217,7 +22224,7 @@
           this.subscribe("column-init", this.initializeColumn.bind(this));
           this.subscribe(
             "cell-dblclick",
-            this.cellContentsSelectionFixer.bind(this)
+            this.cellContentsSelectionFixer.bind(this),
           );
         },
       },
@@ -22253,7 +22260,7 @@
           for (var key in this.eventMap) {
             this.subscriptionChangeExternal(
               key,
-              this.subscriptionChanged.bind(this, key)
+              this.subscriptionChanged.bind(this, key),
             );
           }
         },
@@ -22295,20 +22302,20 @@
             this.touchSubscribers[type + "-touchstart"] = this.handleTouch.bind(
               this,
               type,
-              "start"
+              "start",
             );
             this.touchSubscribers[type + "-touchend"] = this.handleTouch.bind(
               this,
               type,
-              "end"
+              "end",
             );
             this.subscribe(
               type + "-touchstart",
-              this.touchSubscribers[type + "-touchstart"]
+              this.touchSubscribers[type + "-touchstart"],
             );
             this.subscribe(
               type + "-touchend",
-              this.touchSubscribers[type + "-touchend"]
+              this.touchSubscribers[type + "-touchend"],
             );
           }
 
@@ -22335,11 +22342,11 @@
             if (notouch) {
               this.unsubscribe(
                 type + "-touchstart",
-                this.touchSubscribers[type + "-touchstart"]
+                this.touchSubscribers[type + "-touchstart"],
               );
               this.unsubscribe(
                 type + "-touchend",
-                this.touchSubscribers[type + "-touchend"]
+                this.touchSubscribers[type + "-touchend"],
               );
               delete this.touchSubscribers[type + "-touchstart"];
               delete this.touchSubscribers[type + "-touchend"];
@@ -22494,7 +22501,7 @@
           rowManager.element.scrollTop = newPos;
         } else {
           rowManager.scrollToRow(
-            rowManager.getDisplayRows()[rowManager.displayRowsCount - 1]
+            rowManager.getDisplayRows()[rowManager.displayRowsCount - 1],
           );
         }
       }
@@ -22517,7 +22524,7 @@
 
       if (rowManager.displayRowsCount) {
         rowManager.scrollToRow(
-          rowManager.getDisplayRows()[rowManager.displayRowsCount - 1]
+          rowManager.getDisplayRows()[rowManager.displayRowsCount - 1],
         );
       }
 
@@ -22742,14 +22749,14 @@
           if (this.keyupBinding) {
             this.table.element.removeEventListener(
               "keydown",
-              this.keyupBinding
+              this.keyupBinding,
             );
           }
 
           if (this.keydownBinding) {
             this.table.element.removeEventListener(
               "keyup",
-              this.keydownBinding
+              this.keydownBinding,
             );
           }
         },
@@ -22859,7 +22866,7 @@
               console.warn(
                 "Menu Error - no container element found matching selector:",
                 this.table.options.menuContainer,
-                "(defaulting to document body)"
+                "(defaulting to document body)",
               );
             }
           } else if (this.menuContainer === true) {
@@ -22874,7 +22881,7 @@
             console.warn(
               "Menu Error - container element does not contain this table:",
               this.table.options.menuContainer,
-              "(defaulting to document body)"
+              "(defaulting to document body)",
             );
           }
 
@@ -22906,18 +22913,18 @@
           if (this.table.options.rowContextMenu) {
             this.subscribe(
               "row-contextmenu",
-              this.loadMenuEvent.bind(this, this.table.options.rowContextMenu)
+              this.loadMenuEvent.bind(this, this.table.options.rowContextMenu),
             );
             this.table.on(
               "rowTapHold",
-              this.loadMenuEvent.bind(this, this.table.options.rowContextMenu)
+              this.loadMenuEvent.bind(this, this.table.options.rowContextMenu),
             );
           }
 
           if (this.table.options.rowClickMenu) {
             this.subscribe(
               "row-click",
-              this.loadMenuEvent.bind(this, this.table.options.rowClickMenu)
+              this.loadMenuEvent.bind(this, this.table.options.rowClickMenu),
             );
           }
         },
@@ -22928,18 +22935,24 @@
           if (this.table.options.groupContextMenu) {
             this.subscribe(
               "group-contextmenu",
-              this.loadMenuEvent.bind(this, this.table.options.groupContextMenu)
+              this.loadMenuEvent.bind(
+                this,
+                this.table.options.groupContextMenu,
+              ),
             );
             this.table.on(
               "groupTapHold",
-              this.loadMenuEvent.bind(this, this.table.options.groupContextMenu)
+              this.loadMenuEvent.bind(
+                this,
+                this.table.options.groupContextMenu,
+              ),
             );
           }
 
           if (this.table.options.groupClickMenu) {
             this.subscribe(
               "group-click",
-              this.loadMenuEvent.bind(this, this.table.options.groupClickMenu)
+              this.loadMenuEvent.bind(this, this.table.options.groupClickMenu),
             );
           }
         },
@@ -22957,11 +22970,11 @@
               this.loadMenuTableColumnEvent.bind(this, "headerContextMenu");
             this.subscribe(
               "column-contextmenu",
-              this.columnSubscribers.headerContextMenu
+              this.columnSubscribers.headerContextMenu,
             );
             this.table.on(
               "headerTapHold",
-              this.loadMenuTableColumnEvent.bind(this, "headerContextMenu")
+              this.loadMenuTableColumnEvent.bind(this, "headerContextMenu"),
             );
           }
 
@@ -22970,7 +22983,7 @@
               this.loadMenuTableColumnEvent.bind(this, "headerClickMenu");
             this.subscribe(
               "column-click",
-              this.columnSubscribers.headerClickMenu
+              this.columnSubscribers.headerClickMenu,
             );
           }
 
@@ -22983,18 +22996,18 @@
               this.loadMenuTableCellEvent.bind(this, "contextMenu");
             this.subscribe(
               "cell-contextmenu",
-              this.columnSubscribers.contextMenu
+              this.columnSubscribers.contextMenu,
             );
             this.table.on(
               "cellTapHold",
-              this.loadMenuTableCellEvent.bind(this, "contextMenu")
+              this.loadMenuTableCellEvent.bind(this, "contextMenu"),
             );
           }
 
           if (def.clickMenu && !this.columnSubscribers.clickMenu) {
             this.columnSubscribers.clickMenu = this.loadMenuTableCellEvent.bind(
               this,
-              "clickMenu"
+              "clickMenu",
             );
             this.subscribe("cell-click", this.columnSubscribers.clickMenu);
           }
@@ -23017,7 +23030,7 @@
           });
           column.titleElement.insertBefore(
             headerMenuEl,
-            column.titleElement.firstChild
+            column.titleElement.firstChild,
           );
         },
       },
@@ -23117,7 +23130,7 @@
               if (typeof disabled == "function") {
                 disabled = disabled.call(
                   _this3.table,
-                  component.getComponent()
+                  component.getComponent(),
                 );
               }
 
@@ -23207,7 +23220,7 @@
           setTimeout(function () {
             _this4.table.rowManager.element.addEventListener(
               "scroll",
-              _this4.blurEvent
+              _this4.blurEvent,
             );
 
             document.body.addEventListener("click", _this4.blurEvent);
@@ -23277,13 +23290,13 @@
           window.removeEventListener("resize", this.blurEvent);
           this.table.rowManager.element.removeEventListener(
             "scroll",
-            this.blurEvent
+            this.blurEvent,
           );
 
           if (this.currentComponent) {
             this.dispatchExternal(
               "menuClosed",
-              this.currentComponent.getComponent()
+              this.currentComponent.getComponent(),
             );
             this.currentComponent = null;
           }
@@ -23376,7 +23389,7 @@
                   if (self.toCol !== column || !self.toColAfter) {
                     colEl.parentNode.insertBefore(
                       self.placeholderElement,
-                      colEl.nextSibling
+                      colEl.nextSibling,
                     );
                     self.moveColumn(column, true);
                   }
@@ -23384,7 +23397,7 @@
                   if (self.toCol !== column || self.toColAfter) {
                     colEl.parentNode.insertBefore(
                       self.placeholderElement,
-                      colEl
+                      colEl,
                     );
                     self.moveColumn(column, false);
                   }
@@ -23445,7 +23458,7 @@
             },
             {
               passive: true,
-            }
+            },
           );
           colEl.addEventListener(
             "touchmove",
@@ -23471,7 +23484,7 @@
                         .getElement()
                         .parentNode.insertBefore(
                           _this2.placeholderElement,
-                          moveToCol.getElement().nextSibling
+                          moveToCol.getElement().nextSibling,
                         );
 
                       _this2.moveColumn(moveToCol, true);
@@ -23487,7 +23500,7 @@
                         .getElement()
                         .parentNode.insertBefore(
                           _this2.placeholderElement,
-                          moveToCol.getElement()
+                          moveToCol.getElement(),
                         );
 
                       _this2.moveColumn(moveToCol, false);
@@ -23507,7 +23520,7 @@
             },
             {
               passive: true,
-            }
+            },
           );
           colEl.addEventListener("touchend", function (e) {
             if (_this2.checkTimeout) {
@@ -23563,7 +23576,7 @@
                 .getElement()
                 .addEventListener(
                   "mousemove",
-                  column.modules.moveColumn.mousemove
+                  column.modules.moveColumn.mousemove,
                 );
             }
           });
@@ -23578,7 +23591,7 @@
                 .getElement()
                 .removeEventListener(
                   "mousemove",
-                  column.modules.moveColumn.mousemove
+                  column.modules.moveColumn.mousemove,
                 );
             }
           });
@@ -23598,7 +23611,7 @@
               if (cellEl.parentNode && movingCells[i]) {
                 cellEl.parentNode.insertBefore(
                   movingCells[i].getElement(),
-                  cellEl.nextSibling
+                  cellEl.nextSibling,
                 );
               }
             });
@@ -23609,7 +23622,7 @@
               if (cellEl.parentNode && movingCells[i]) {
                 cellEl.parentNode.insertBefore(
                   movingCells[i].getElement(),
-                  cellEl
+                  cellEl,
                 );
               }
             });
@@ -23624,10 +23637,10 @@
 
             this.placeholderElement.parentNode.insertBefore(
               this.moving.getElement(),
-              this.placeholderElement.nextSibling
+              this.placeholderElement.nextSibling,
             );
             this.placeholderElement.parentNode.removeChild(
-              this.placeholderElement
+              this.placeholderElement,
             );
             this.hoverElement.parentNode.removeChild(this.hoverElement);
             this.table.element.classList.remove("tabulator-block-select");
@@ -23636,7 +23649,7 @@
               this.table.columnManager.moveColumnActual(
                 this.moving,
                 this.toCol,
-                this.toColAfter
+                this.toColAfter,
               );
             }
 
@@ -23802,7 +23815,7 @@
                 var rowEl = group.getElement();
                 rowEl.parentNode.insertBefore(
                   self.placeholderElement,
-                  rowEl.nextSibling
+                  rowEl.nextSibling,
                 );
                 self.moveRow(group, true);
               }
@@ -23844,7 +23857,7 @@
               if (self.toRow !== row || !self.toRowAfter) {
                 rowEl.parentNode.insertBefore(
                   self.placeholderElement,
-                  rowEl.nextSibling
+                  rowEl.nextSibling,
                 );
                 self.moveRow(row, true);
               }
@@ -23946,7 +23959,7 @@
             },
             {
               passive: true,
-            }
+            },
           );
           this.moving, this.toRow, this.toRowAfter;
           element.addEventListener("touchmove", function (e) {
@@ -23973,7 +23986,7 @@
                       .getElement()
                       .parentNode.insertBefore(
                         _this2.placeholderElement,
-                        moveToRow.getElement().nextSibling
+                        moveToRow.getElement().nextSibling,
                       );
 
                     _this2.moveRow(moveToRow, true);
@@ -23989,7 +24002,7 @@
                       .getElement()
                       .parentNode.insertBefore(
                         _this2.placeholderElement,
-                        moveToRow.getElement()
+                        moveToRow.getElement(),
                       );
 
                     _this2.moveRow(moveToRow, false);
@@ -24049,7 +24062,7 @@
                 .getElement()
                 .removeEventListener(
                   "mousemove",
-                  row.modules.moveRow.mousemove
+                  row.modules.moveRow.mousemove,
                 );
             }
           });
@@ -24129,10 +24142,10 @@
             if (!this.connection) {
               this.placeholderElement.parentNode.insertBefore(
                 this.moving.getElement(),
-                this.placeholderElement.nextSibling
+                this.placeholderElement.nextSibling,
               );
               this.placeholderElement.parentNode.removeChild(
-                this.placeholderElement
+                this.placeholderElement,
               );
             }
 
@@ -24143,12 +24156,12 @@
               this.table.rowManager.moveRow(
                 this.moving,
                 this.toRow,
-                this.toRowAfter
+                this.toRowAfter,
               );
             } else {
               this.dispatchExternal(
                 "rowMoveCancelled",
-                this.moving.getComponent()
+                this.moving.getComponent(),
               );
             }
 
@@ -24160,7 +24173,7 @@
 
             if (this.connection) {
               this.table.element.classList.remove(
-                "tabulator-movingrow-sending"
+                "tabulator-movingrow-sending",
               );
               this.disconnectFromTables();
             }
@@ -24216,7 +24229,7 @@
             "movableRowsElementDrop",
             e,
             element,
-            row ? row.getComponent() : false
+            row ? row.getComponent() : false,
           );
         }, //establish connection with other tables
       },
@@ -24229,7 +24242,7 @@
 
           if (this.connectionSelectorsTables) {
             connectionTables = this.commsConnections(
-              this.connectionSelectorsTables
+              this.connectionSelectorsTables,
             );
             this.dispatchExternal("movableRowsSendingStart", connectionTables);
             this.commsSend(
@@ -24238,7 +24251,7 @@
               "connect",
               {
                 row: row,
-              }
+              },
             );
           }
 
@@ -24254,7 +24267,7 @@
             this.connectionSelectorsElements.forEach(function (query) {
               if (typeof query === "string") {
                 _this3.connectionElements = _this3.connectionElements.concat(
-                  Array.prototype.slice.call(document.querySelectorAll(query))
+                  Array.prototype.slice.call(document.querySelectorAll(query)),
                 );
               } else {
                 _this3.connectionElements.push(query);
@@ -24279,13 +24292,13 @@
 
           if (this.connectionSelectorsTables) {
             connectionTables = this.commsConnections(
-              this.connectionSelectorsTables
+              this.connectionSelectorsTables,
             );
             this.dispatchExternal("movableRowsSendingStop", connectionTables);
             this.commsSend(
               this.connectionSelectorsTables,
               "moveRow",
-              "disconnect"
+              "disconnect",
             );
           }
 
@@ -24293,7 +24306,7 @@
             element.classList.remove("tabulator-movingrow-receiving");
             element.removeEventListener(
               "mouseup",
-              element.tabulatorElementDropEvent
+              element.tabulatorElementDropEvent,
             );
             delete element.tabulatorElementDropEvent;
           });
@@ -24320,14 +24333,14 @@
             this.tableRowDropEvent = this.tableRowDrop.bind(this);
             this.table.element.addEventListener(
               "mouseup",
-              this.tableRowDropEvent
+              this.tableRowDropEvent,
             );
             this.dispatchExternal("movableRowsReceivingStart", row, table);
             return true;
           } else {
             console.warn(
               "Move Row Error - Table cannot accept connection, already connected to table:",
-              this.connectedTable
+              this.connectedTable,
             );
             return false;
           }
@@ -24340,7 +24353,7 @@
             this.connectedTable = false;
             this.connectedRow = false;
             this.table.element.classList.remove(
-              "tabulator-movingrow-receiving"
+              "tabulator-movingrow-receiving",
             );
             this.table.rowManager.getDisplayRows().forEach(function (row) {
               if (
@@ -24355,12 +24368,12 @@
             });
             this.table.element.removeEventListener(
               "mouseup",
-              this.tableRowDropEvent
+              this.tableRowDropEvent,
             );
             this.dispatchExternal("movableRowsReceivingStop", table);
           } else {
             console.warn(
-              "Move Row Error - trying to disconnect from non connected table"
+              "Move Row Error - trying to disconnect from non connected table",
             );
           }
         },
@@ -24386,13 +24399,13 @@
                 this,
                 this.moving.getComponent(),
                 row ? row.getComponent() : undefined,
-                table
+                table,
               );
             } else {
               if (this.table.options.movableRowsSender) {
                 console.warn(
                   "Mover Row Error - no matching sender found:",
-                  this.table.options.movableRowsSender
+                  this.table.options.movableRowsSender,
                 );
               }
             }
@@ -24401,14 +24414,14 @@
               "movableRowsSent",
               this.moving.getComponent(),
               row ? row.getComponent() : undefined,
-              table
+              table,
             );
           } else {
             this.dispatchExternal(
               "movableRowsSentFailed",
               this.moving.getComponent(),
               row ? row.getComponent() : undefined,
-              table
+              table,
             );
           }
 
@@ -24437,12 +24450,12 @@
               this,
               this.connectedRow.getComponent(),
               row ? row.getComponent() : undefined,
-              this.connectedTable
+              this.connectedTable,
             );
           } else {
             console.warn(
               "Mover Row Error - no matching receiver found:",
-              this.table.options.movableRowsReceiver
+              this.table.options.movableRowsReceiver,
             );
           }
 
@@ -24451,14 +24464,14 @@
               "movableRowsReceived",
               this.connectedRow.getComponent(),
               row ? row.getComponent() : undefined,
-              this.connectedTable
+              this.connectedTable,
             );
           } else {
             this.dispatchExternal(
               "movableRowsReceivedFailed",
               this.connectedRow.getComponent(),
               row ? row.getComponent() : undefined,
-              this.connectedTable
+              this.connectedTable,
             );
           }
 
@@ -24566,7 +24579,7 @@
           this.subscribe("column-layout", this.initializeColumn.bind(this));
           this.subscribe(
             "row-data-init-before",
-            this.rowDataChanged.bind(this)
+            this.rowDataChanged.bind(this),
           );
           this.subscribe("row-data-changing", this.rowDataChanged.bind(this));
         },
@@ -24619,7 +24632,7 @@
               } else {
                 console.warn(
                   "Mutator Error - No such mutator found, ignoring: ",
-                  value
+                  value,
                 );
               }
 
@@ -24651,7 +24664,7 @@
 
                 if (mutator) {
                   value = column.getFieldValue(
-                    typeof updatedData !== "undefined" ? updatedData : data
+                    typeof updatedData !== "undefined" ? updatedData : data,
                   );
 
                   if (type == "data" || typeof value !== "undefined") {
@@ -24662,7 +24675,7 @@
                         : mutator.params;
                     column.setFieldValue(
                       data,
-                      mutator.mutator(value, data, type, params, component)
+                      mutator.mutator(value, data, type, params, component),
                     );
                   }
                 }
@@ -24691,7 +24704,7 @@
                 tempData,
                 "edit",
                 mutator.params,
-                cell.getComponent()
+                cell.getComponent(),
               );
             }
           }
@@ -24731,7 +24744,7 @@
       "pagination|counter|showing",
       function (value) {
         showingEl.innerHTML = value;
-      }
+      },
     );
     valueEl.innerHTML =
       " " +
@@ -24743,14 +24756,14 @@
       "pagination|counter|of",
       function (value) {
         ofEl.innerHTML = value;
-      }
+      },
     );
     totalEl.innerHTML = " " + totalRows + " ";
     this.table.modules.localize.langBind(
       "pagination|counter|rows",
       function (value) {
         rowsEl.innerHTML = value;
-      }
+      },
     );
     el.appendChild(showingEl);
     el.appendChild(valueEl);
@@ -24771,21 +24784,21 @@
       "pagination|counter|showing",
       function (value) {
         showingEl.innerHTML = value;
-      }
+      },
     );
     valueEl.innerHTML = " " + currentPage + " ";
     this.table.modules.localize.langBind(
       "pagination|counter|of",
       function (value) {
         ofEl.innerHTML = value;
-      }
+      },
     );
     totalEl.innerHTML = " " + totalPages + " ";
     this.table.modules.localize.langBind(
       "pagination|counter|pages",
       function (value) {
         rowsEl.innerHTML = value;
-      }
+      },
     );
     el.appendChild(showingEl);
     el.appendChild(valueEl);
@@ -24858,53 +24871,53 @@
 
       _this.registerTableFunction(
         "setMaxPage",
-        _this.setMaxPage.bind(_assertThisInitialized(_this))
+        _this.setMaxPage.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "setPage",
-        _this.setPage.bind(_assertThisInitialized(_this))
+        _this.setPage.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "setPageToRow",
-        _this.userSetPageToRow.bind(_assertThisInitialized(_this))
+        _this.userSetPageToRow.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "setPageSize",
-        _this.userSetPageSize.bind(_assertThisInitialized(_this))
+        _this.userSetPageSize.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "getPageSize",
-        _this.getPageSize.bind(_assertThisInitialized(_this))
+        _this.getPageSize.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "previousPage",
-        _this.previousPage.bind(_assertThisInitialized(_this))
+        _this.previousPage.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "nextPage",
-        _this.nextPage.bind(_assertThisInitialized(_this))
+        _this.nextPage.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "getPage",
-        _this.getPage.bind(_assertThisInitialized(_this))
+        _this.getPage.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "getPageMax",
-        _this.getPageMax.bind(_assertThisInitialized(_this))
+        _this.getPageMax.bind(_assertThisInitialized(_this)),
       ); //register component functions
 
       _this.registerComponentFunction(
         "row",
         "pageTo",
-        _this.setPageToRow.bind(_assertThisInitialized(_this))
+        _this.setPageToRow.bind(_assertThisInitialized(_this)),
       );
 
       return _this;
@@ -24918,12 +24931,12 @@
             this.subscribe("row-deleted", this.rowsUpdated.bind(this));
             this.subscribe(
               "row-adding-position",
-              this.rowAddingPosition.bind(this)
+              this.rowAddingPosition.bind(this),
             );
             this.subscribe("row-added", this.rowsUpdated.bind(this));
             this.subscribe(
               "data-processed",
-              this.initialLoadComplete.bind(this)
+              this.initialLoadComplete.bind(this),
             );
             this.subscribe("table-built", this.calculatePageSizes.bind(this));
 
@@ -24934,7 +24947,7 @@
 
             if (this.table.options.progressiveLoad) {
               console.error(
-                "Progressive Load Error - Pagination and progressive load cannot be used at the same time"
+                "Progressive Load Error - Pagination and progressive load cannot be used at the same time",
               );
             }
 
@@ -24949,7 +24962,7 @@
             this.subscribe("table-built", this.calculatePageSizes.bind(this));
             this.subscribe(
               "data-processed",
-              this.initialLoadComplete.bind(this)
+              this.initialLoadComplete.bind(this),
             );
             this.initializeProgressive(this.table.options.progressiveLoad);
 
@@ -25006,7 +25019,7 @@
             this.table.rowManager.getTableElement().appendChild(testElRow);
             this.size = Math.floor(
               this.table.rowManager.getElement().clientHeight /
-                testElRow.offsetHeight
+                testElRow.offsetHeight,
             );
             this.table.rowManager.getTableElement().removeChild(testElRow);
           }
@@ -25206,7 +25219,7 @@
             } else {
               console.warn(
                 "Pagination Error - No such page counter found: ",
-                counter
+                counter,
               );
             }
           }
@@ -25287,7 +25300,7 @@
                 _this3.setPageSize(
                   _this3.pageSizeSelect.value == "true"
                     ? true
-                    : _this3.pageSizeSelect.value
+                    : _this3.pageSizeSelect.value,
                 );
 
                 _this3.setPage(1);
@@ -25308,24 +25321,24 @@
                     HTMLElement
                   ) {
                     this.table.options.paginationCounterElement.appendChild(
-                      this.pageCounterElement
+                      this.pageCounterElement,
                     );
                   } else if (
                     typeof this.table.options.paginationCounterElement ===
                     "string"
                   ) {
                     paginationCounterHolder = document.querySelector(
-                      this.table.options.paginationCounterElement
+                      this.table.options.paginationCounterElement,
                     );
 
                     if (paginationCounterHolder) {
                       paginationCounterHolder.appendChild(
-                        this.pageCounterElement
+                        this.pageCounterElement,
                       );
                     } else {
                       console.warn(
                         "Pagination Error - Unable to find element matching paginationCounterElement selector:",
-                        this.table.options.paginationCounterElement
+                        this.table.options.paginationCounterElement,
                       );
                     }
                   }
@@ -25434,7 +25447,7 @@
               "Pagination Error - Requested page is out of range of 1 - " +
                 this.max +
                 ":",
-              page
+              page,
             );
             return Promise.reject();
           }
@@ -25444,7 +25457,7 @@
         key: "setPageToRow",
         value: function setPageToRow(row) {
           var rows = this.table.rowManager.getDisplayRows(
-            this.displayIndex - 1
+            this.displayIndex - 1,
           );
           var index = rows.indexOf(row);
 
@@ -25495,7 +25508,7 @@
               currentRow,
               this.page,
               totalRows,
-              this.max
+              this.max,
             );
 
             switch (_typeof(content)) {
@@ -25504,7 +25517,7 @@
                   //clear previous cell contents
                   while (this.pageCounterElement.firstChild) {
                     this.pageCounterElement.removeChild(
-                      this.pageCounterElement.firstChild
+                      this.pageCounterElement.firstChild,
                     );
                   }
 
@@ -25515,7 +25528,7 @@
                   if (content != null) {
                     console.warn(
                       "Page Counter Error - Page Counter has returned a type of object, the only valid page counter object return is an instance of Node, the page counter returned:",
-                      content
+                      content,
                     );
                   }
                 }
@@ -25612,7 +25625,7 @@
           } else {
             console.warn(
               "Pagination Error - Previous page would be less than page 1:",
-              0
+              0,
             );
             return Promise.reject();
           }
@@ -25631,7 +25644,7 @@
                 "Pagination Error - Next page would be greater than maximum page of " +
                   this.max +
                   ":",
-                this.max + 1
+                this.max + 1,
               );
             }
 
@@ -25728,7 +25741,7 @@
             default:
               console.warn(
                 "Pagination Error - no such pagination mode:",
-                this.mode
+                this.mode,
               );
               return Promise.reject();
           }
@@ -25745,7 +25758,7 @@
             console.warn(
               "Remote Pagination Error - Server response missing '" +
                 (this.options("dataReceiveParams").last_page || "last_page") +
-                "' property"
+                "' property",
             );
           }
 
@@ -25766,7 +25779,7 @@
                     this.table.rowManager.setData(
                       data.data,
                       false,
-                      this.page == 1
+                      this.page == 1,
                     );
                   } else {
                     this.table.rowManager.addRows(data.data);
@@ -25788,7 +25801,7 @@
                   this.table.rowManager.setData(
                     data,
                     this.page !== 1,
-                    this.page == 1
+                    this.page == 1,
                   );
                   margin =
                     this.table.options.progressiveLoadScrollMargin ||
@@ -25816,7 +25829,7 @@
             console.warn(
               "Remote Pagination Error - Server response missing '" +
                 (this.options("dataReceiveParams").data || "data") +
-                "' property"
+                "' property",
             );
           }
 
@@ -25973,7 +25986,7 @@
                 } else {
                   console.warn(
                     "Persistence Read Error - invalid reader set",
-                    this.table.options.persistenceReaderFunc
+                    this.table.options.persistenceReaderFunc,
                   );
                 }
               }
@@ -25983,7 +25996,7 @@
               } else {
                 console.warn(
                   "Persistence Read Error - invalid reader set",
-                  this.mode
+                  this.mode,
                 );
               }
             }
@@ -26004,7 +26017,7 @@
                 } else {
                   console.warn(
                     "Persistence Write Error - invalid reader set",
-                    this.table.options.persistenceWriterFunc
+                    this.table.options.persistenceWriterFunc,
                   );
                 }
               }
@@ -26014,7 +26027,7 @@
               } else {
                 console.warn(
                   "Persistence Write Error - invalid writer set",
-                  this.mode
+                  this.mode,
                 );
               }
             } //set storage tag
@@ -26095,7 +26108,7 @@
             if (this.config.columns) {
               this.table.options.columns = this.load(
                 "columns",
-                this.table.options.columns
+                this.table.options.columns,
               );
               this.subscribe("column-init", this.initializeColumn.bind(this));
               this.subscribe("column-show", this.save.bind(this, "columns"));
@@ -26107,28 +26120,28 @@
             this.subscribe("table-redraw", this.tableRedraw.bind(this));
             this.subscribe(
               "filter-changed",
-              this.eventSave.bind(this, "filter")
+              this.eventSave.bind(this, "filter"),
             );
             this.subscribe("sort-changed", this.eventSave.bind(this, "sort"));
             this.subscribe("group-changed", this.eventSave.bind(this, "group"));
             this.subscribe("page-changed", this.eventSave.bind(this, "page"));
             this.subscribe(
               "column-resized",
-              this.eventSave.bind(this, "columns")
+              this.eventSave.bind(this, "columns"),
             );
             this.subscribe(
               "layout-refreshed",
-              this.eventSave.bind(this, "columns")
+              this.eventSave.bind(this, "columns"),
             );
           }
 
           this.registerTableFunction(
             "getColumnLayout",
-            this.getColumnLayout.bind(this)
+            this.getColumnLayout.bind(this),
           );
           this.registerTableFunction(
             "setColumnLayout",
-            this.setColumnLayout.bind(this)
+            this.setColumnLayout.bind(this),
           );
         },
       },
@@ -26184,7 +26197,7 @@
         key: "setColumnLayout",
         value: function setColumnLayout(layout) {
           this.table.columnManager.setColumns(
-            this.mergeDefinition(this.table.options.columns, layout)
+            this.mergeDefinition(this.table.options.columns, layout),
           );
           return true;
         }, ///////////////////////////////////
@@ -26283,7 +26296,7 @@
               if (from.columns) {
                 from.columns = _this2.mergeDefinition(
                   from.columns,
-                  column.columns
+                  column.columns,
                 );
               }
 
@@ -26525,7 +26538,7 @@
           if (this.table.options.printAsHtml) {
             window.addEventListener(
               "beforeprint",
-              this.replaceTable.bind(this)
+              this.replaceTable.bind(this),
             );
             window.addEventListener("afterprint", this.cleanup.bind(this));
           }
@@ -26549,13 +26562,13 @@
                 this.table.options.printConfig,
                 this.table.options.printStyled,
                 this.table.options.printRowRange,
-                "print"
-              )
+                "print",
+              ),
             );
             this.table.element.style.display = "none";
             this.table.element.parentNode.insertBefore(
               this.element,
-              this.table.element
+              this.table.element,
             );
           }
         },
@@ -26586,7 +26599,7 @@
                 ? style
                 : this.table.options.printStyled,
               visible || this.table.options.printRowRange,
-              "print"
+              "print",
             ),
             headerContent,
             footerContent;
@@ -26740,7 +26753,7 @@
               if (!self.blocked && version === self.currentVersion) {
                 if (self.data.length) {
                   row = self.table.rowManager.getRowFromDataObject(
-                    self.data[0]
+                    self.data[0],
                   );
 
                   if (row) {
@@ -26763,7 +26776,7 @@
               if (!self.blocked && version === self.currentVersion) {
                 if (self.data.length) {
                   row = self.table.rowManager.getRowFromDataObject(
-                    self.data[self.data.length - 1]
+                    self.data[self.data.length - 1],
                   );
 
                   if (row) {
@@ -26800,7 +26813,7 @@
                         rowData,
                         true,
                         startRow,
-                        true
+                        true,
                       );
                     });
                   } else {
@@ -26810,7 +26823,7 @@
                         rowData,
                         true,
                         false,
-                        true
+                        true,
                       );
                     });
                   }
@@ -26819,7 +26832,7 @@
                 if (end !== 0) {
                   var oldRows = data.slice(
                     start,
-                    typeof args[1] === "undefined" ? args[1] : start + end
+                    typeof args[1] === "undefined" ? args[1] : start + end,
                   );
                   oldRows.forEach(function (rowData, i) {
                     var row =
@@ -27168,7 +27181,7 @@
                   ((typeof e.screenX === "undefined"
                     ? e.touches[0].screenX
                     : e.screenX) -
-                    self.startX)
+                    self.startX),
               );
             } else {
               column.setWidth(
@@ -27176,7 +27189,7 @@
                   ((typeof e.screenX === "undefined"
                     ? e.touches[0].screenX
                     : e.screenX) -
-                    self.startX)
+                    self.startX),
               );
             }
 
@@ -27213,7 +27226,7 @@
             self.dispatch("column-resized", column);
             self.table.externalEvents.dispatch(
               "columnResized",
-              column.getComponent()
+              column.getComponent(),
             );
           }
 
@@ -27330,7 +27343,7 @@
                 ((typeof e.screenY === "undefined"
                   ? e.touches[0].screenY
                   : e.screenY) -
-                  self.startY)
+                  self.startY),
             );
           }
 
@@ -27568,27 +27581,27 @@
             this.subscribe("column-layout", this.initializeColumn.bind(this));
             this.subscribe(
               "column-show",
-              this.updateColumnVisibility.bind(this)
+              this.updateColumnVisibility.bind(this),
             );
             this.subscribe(
               "column-hide",
-              this.updateColumnVisibility.bind(this)
+              this.updateColumnVisibility.bind(this),
             );
             this.subscribe(
               "columns-loaded",
-              this.initializeResponsivity.bind(this)
+              this.initializeResponsivity.bind(this),
             );
             this.subscribe(
               "column-moved",
-              this.initializeResponsivity.bind(this)
+              this.initializeResponsivity.bind(this),
             );
             this.subscribe(
               "column-add",
-              this.initializeResponsivity.bind(this)
+              this.initializeResponsivity.bind(this),
             );
             this.subscribe(
               "column-delete",
-              this.initializeResponsivity.bind(this)
+              this.initializeResponsivity.bind(this),
             );
             this.subscribe("table-redrawing", this.tableRedraw.bind(this));
 
@@ -27653,7 +27666,7 @@
           } //assign collapse column
 
           var _iterator = _createForOfIteratorHelper(
-              this.table.columnManager.columnsByIndex
+              this.table.columnManager.columnsByIndex,
             ),
             _step;
 
@@ -27844,7 +27857,7 @@
             }
 
             contents = this.collapseFormatter(
-              this.generateCollapsedRowData(row)
+              this.generateCollapsedRowData(row),
             );
 
             if (contents) {
@@ -27898,7 +27911,7 @@
                     self.table.modules.format,
                     mockCellComponent,
                     column.modules.format.params,
-                    onRendered
+                    onRendered,
                   ),
                 });
               } else {
@@ -27985,51 +27998,51 @@
 
       _this.registerTableFunction(
         "selectRow",
-        _this.selectRows.bind(_assertThisInitialized(_this))
+        _this.selectRows.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "deselectRow",
-        _this.deselectRows.bind(_assertThisInitialized(_this))
+        _this.deselectRows.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "toggleSelectRow",
-        _this.toggleRow.bind(_assertThisInitialized(_this))
+        _this.toggleRow.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "getSelectedRows",
-        _this.getSelectedRows.bind(_assertThisInitialized(_this))
+        _this.getSelectedRows.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "getSelectedData",
-        _this.getSelectedData.bind(_assertThisInitialized(_this))
+        _this.getSelectedData.bind(_assertThisInitialized(_this)),
       ); //register component functions
 
       _this.registerComponentFunction(
         "row",
         "select",
-        _this.selectRows.bind(_assertThisInitialized(_this))
+        _this.selectRows.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "row",
         "deselect",
-        _this.deselectRows.bind(_assertThisInitialized(_this))
+        _this.deselectRows.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "row",
         "toggleSelect",
-        _this.toggleRow.bind(_assertThisInitialized(_this))
+        _this.toggleRow.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "row",
         "isSelected",
-        _this.isRowSelected.bind(_assertThisInitialized(_this))
+        _this.isRowSelected.bind(_assertThisInitialized(_this)),
       );
 
       return _this;
@@ -28099,7 +28112,7 @@
           if (
             self.table.options.selectableCheck.call(
               this.table,
-              row.getComponent()
+              row.getComponent(),
             )
           ) {
             element.classList.add("tabulator-selectable");
@@ -28117,7 +28130,7 @@
                     self.lastClickedRow = self.lastClickedRow || row;
                     var lastClickedRowIdx =
                       self.table.rowManager.getDisplayRowIndex(
-                        self.lastClickedRow
+                        self.lastClickedRow,
                       );
                     var rowIdx = self.table.rowManager.getDisplayRowIndex(row);
                     var fromRowIdx =
@@ -28127,7 +28140,7 @@
                     var rows = self.table.rowManager.getDisplayRows().slice(0);
                     var toggledRows = rows.splice(
                       fromRowIdx,
-                      toRowIdx - fromRowIdx + 1
+                      toRowIdx - fromRowIdx + 1,
                     );
 
                     if (e.ctrlKey || e.metaKey) {
@@ -28158,7 +28171,7 @@
                         ) {
                           toggledRows = toggledRows.slice(
                             0,
-                            self.table.options.selectable
+                            self.table.options.selectable,
                           );
                         }
                       }
@@ -28233,7 +28246,7 @@
           if (
             this.table.options.selectableCheck.call(
               this.table,
-              row.getComponent()
+              row.getComponent(),
             )
           ) {
             if (row.modules.select && row.modules.select.selected) {
@@ -28338,7 +28351,7 @@
             if (!silent) {
               console.warn(
                 "Selection Error - No such row found, ignoring selection:" +
-                  rowInfo
+                  rowInfo,
               );
             }
           }
@@ -28416,7 +28429,7 @@
             if (!silent) {
               console.warn(
                 "Deselection Error - No such row found, ignoring selection:" +
-                  rowInfo
+                  rowInfo,
               );
             }
           }
@@ -28464,7 +28477,7 @@
             this.dispatchExternal(
               "rowSelectionChanged",
               this.getSelectedData(),
-              this.getSelectedRows()
+              this.getSelectedRows(),
             );
           }
         },
@@ -28824,7 +28837,7 @@
 
       _this.registerTableOption(
         "headerSortElement",
-        "<div class='tabulator-arrow'></div>"
+        "<div class='tabulator-arrow'></div>",
       ); //header sort element
 
       _this.registerColumnOption("sorter");
@@ -28912,7 +28925,7 @@
               } else {
                 console.warn(
                   "Sort Error - No such sorter found: ",
-                  column.definition.sorter
+                  column.definition.sorter,
                 );
               }
 
@@ -29086,7 +29099,7 @@
             } else {
               console.warn(
                 "Sort Warning - Sort field does not exist and is being ignored: ",
-                item.column
+                item.column,
               );
             }
           });
@@ -29231,7 +29244,7 @@
                 b,
                 sortItem.column,
                 sortItem.dir,
-                sortItem.params
+                sortItem.params,
               );
 
               if (result !== 0) {
@@ -29264,7 +29277,7 @@
             el2Comp,
             column.getComponent(),
             dir,
-            params
+            params,
           );
         },
       },
@@ -29436,47 +29449,47 @@
 
       _this.registerTableFunction(
         "getInvalidCells",
-        _this.getInvalidCells.bind(_assertThisInitialized(_this))
+        _this.getInvalidCells.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "clearCellValidation",
-        _this.userClearCellValidation.bind(_assertThisInitialized(_this))
+        _this.userClearCellValidation.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerTableFunction(
         "validate",
-        _this.userValidate.bind(_assertThisInitialized(_this))
+        _this.userValidate.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "cell",
         "isValid",
-        _this.cellIsValid.bind(_assertThisInitialized(_this))
+        _this.cellIsValid.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "cell",
         "clearValidation",
-        _this.clearValidation.bind(_assertThisInitialized(_this))
+        _this.clearValidation.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "cell",
         "validate",
-        _this.cellValidate.bind(_assertThisInitialized(_this))
+        _this.cellValidate.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "column",
         "validate",
-        _this.columnValidate.bind(_assertThisInitialized(_this))
+        _this.columnValidate.bind(_assertThisInitialized(_this)),
       );
 
       _this.registerComponentFunction(
         "row",
         "validate",
-        _this.rowValidate.bind(_assertThisInitialized(_this))
+        _this.rowValidate.bind(_assertThisInitialized(_this)),
       );
 
       return _this;
@@ -29489,7 +29502,7 @@
           this.subscribe("cell-delete", this.clearValidation.bind(this));
           this.subscribe(
             "column-layout",
-            this.initializeColumnCheck.bind(this)
+            this.initializeColumnCheck.bind(this),
           );
         }, ///////////////////////////////////
         ////////// Cell Functions /////////
@@ -29507,7 +29520,7 @@
           return this.validate(
             cell.column.modules.validate,
             cell,
-            cell.getValue()
+            cell.getValue(),
           );
         }, ///////////////////////////////////
         ///////// Column Functions ////////
@@ -29652,7 +29665,7 @@
           if (!func) {
             console.warn(
               "Validator Setup Error - No matching validator found:",
-              type
+              type,
             );
             return false;
           } else {

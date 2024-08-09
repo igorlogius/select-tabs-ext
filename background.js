@@ -147,12 +147,10 @@ browser.menus.create({
   contexts: ["tab"],
 });
 
-
 browser.menus.create({
   type: "separator",
   contexts: ["tab"],
 });
-
 
 // Relationship
 
@@ -256,7 +254,7 @@ function handleHighlighted(highlightInfo) {
 }
 
 const run = {
-  "All": async (/*info, tab*/) => {
+  All: async (/*info, tab*/) => {
     const tabs = await browser.tabs.query({
       currentWindow: true,
       hidden: false,
@@ -294,7 +292,7 @@ const run = {
       highlight(tabs);
     }
   },
-  "Descendents": async (info, tab) => {
+  Descendents: async (info, tab) => {
     allTabs = await browser.tabs.query({
       currentWindow: true,
       hidden: false,
@@ -308,14 +306,14 @@ const run = {
             currentWindow: true,
             highlighted: true,
           })
-        ).map((t) => t.id)
+        ).map((t) => t.id),
       );
     } else {
       consideredTabsIds = new Set(allTabs.map((t) => t.id));
     }
     highlight(getDescendentTabs(tab.id).filter((t) => t.id !== tab.id));
   },
-  "Siblings": async (info, tab) => {
+  Siblings: async (info, tab) => {
     allTabs = await browser.tabs.query({
       hidden: false,
       currentWindow: true,
@@ -328,16 +326,16 @@ const run = {
             currentWindow: true,
             highlighted: true,
           })
-        ).map((t) => t.id)
+        ).map((t) => t.id),
       );
     } else {
       consideredTabsIds = new Set(allTabs.map((t) => t.id));
     }
     highlight(
-      getDescendentTabs(tab.openerTabId, 1).filter((t) => t.id !== tab.id)
+      getDescendentTabs(tab.openerTabId, 1).filter((t) => t.id !== tab.id),
     );
   },
-  "Children": async (info, tab) => {
+  Children: async (info, tab) => {
     allTabs = await browser.tabs.query({
       hidden: false,
       currentWindow: true,
@@ -350,14 +348,14 @@ const run = {
             currentWindow: true,
             highlighted: true,
           })
-        ).map((t) => t.id)
+        ).map((t) => t.id),
       );
     } else {
       consideredTabsIds = new Set(allTabs.map((t) => t.id));
     }
     highlight(getDescendentTabs(tab.id, 1));
   },
-  "Parent": async (info, tab) => {
+  Parent: async (info, tab) => {
     let query;
     if (multipleHighlighted) {
       query = {
@@ -372,12 +370,12 @@ const run = {
       };
     }
     const tabs = (await browser.tabs.query(query)).filter(
-      (t) => t.id === tab.openerTabId
+      (t) => t.id === tab.openerTabId,
     );
 
     highlight(tabs);
   },
-  "Ancestors": async (info, tab) => {
+  Ancestors: async (info, tab) => {
     allTabs = await browser.tabs.query({
       hidden: false,
       currentWindow: true,
@@ -389,7 +387,7 @@ const run = {
         highlighted: true,
       };
       consideredTabsIds = new Set(
-        (await browser.tabs.query(query)).map((t) => t.id)
+        (await browser.tabs.query(query)).map((t) => t.id),
       );
     } else {
       consideredTabsIds = new Set(allTabs.map((t) => t.id));
@@ -435,7 +433,7 @@ const run = {
       };
     }
     const tabs = (await browser.tabs.query(query)).sort((a, b) =>
-      a.id === tab.id ? -1 : b.id === tab.id ? 1 : 0
+      a.id === tab.id ? -1 : b.id === tab.id ? 1 : 0,
     );
     highlight(tabs);
   },
@@ -555,7 +553,7 @@ const run = {
       };
     }
     const tabs = (await browser.tabs.query(query)).sort((a, b) =>
-      a.id === tab.id ? -1 : b.id === tab.id ? 1 : 0
+      a.id === tab.id ? -1 : b.id === tab.id ? 1 : 0,
     );
     highlight(tabs);
   },
@@ -563,7 +561,7 @@ const run = {
     const bookmarkedURLs = new Set(
       (await browser.bookmarks.search({}))
         .filter((m) => typeof m.url === "string")
-        .map((m) => m.url.trim())
+        .map((m) => m.url.trim()),
     );
     const tabs = [];
     for (const t of await browser.tabs.query({ currentWindow: true })) {
