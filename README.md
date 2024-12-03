@@ -1,8 +1,4 @@
-Powerful tab selection addon with a bunch of one click options but also allow
-the user to create custom selection rules, based not only on tab attributes, but
-can also incorporate site parameters and content.
-
-[![](https://raw.githubusercontent.com/igorlogius/igorlogius/main/geFxAddon.png)](https://addons.mozilla.org/firefox/addon/select-tabs-extras/)
+Powerful tab selection addon with a bunch of one click options but also allow the user to create custom selection rules, based not only on tab attributes, but can also incorporate site parameters and content.
 
 ### [Click here to report a bug, make a suggestion or ask a question](https://github.com/igorlogius/igorlogius/issues/new/choose)
 
